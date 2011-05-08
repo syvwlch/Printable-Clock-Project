@@ -152,7 +152,7 @@ module spokes(
 	{
 		rotate(spoke_rotate+360/number_spokes*j,[0,0,1]) 
 		translate([bore_radius,-spoke_width/2,0]) 
-		cube([spoke_length-bore_radius,spokeWidth,spoke_thickness]);
+		cube([spoke_length-bore_radius,spoke_width,spoke_thickness]);
 	}
 }
 
