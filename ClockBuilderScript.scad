@@ -6,8 +6,8 @@ This script builds a clock from parameters defined in the script that calls it v
 
 CC-A-SA licensed.*/
 
-use <MCAD/involute_gears.scad>
-include <clockworkLibrary.scad> 	// version 7
+use <mcad/involute_gears.scad>
+include <clockworkLibrary.scad> 	// version 9
 
 // Overall Parameters
 $fs=0.25*scale;				// controls resolution for small details
@@ -1220,5 +1220,5 @@ echo("Axis Separation:",axis_separation);
 
 if (showAssembly==true) rotate (90,[1,0,0]) rotate (clockCorrection,[0,0,1]) assembled(showShafts,showFrame,showNegativeSpace);
 
-if (showToPrint==true) laidOutToPrint(partToPrint,showLimits); // there are 13 parts, numbers 0 thru 12 (-1 is the negative space of the whole clock, minus frame)
+if (showToPrint==true) laidOutToPrint(partToPrint,showLimits,showNegativeSpace); // there are 13 parts, numbers 0 thru 12 (-1 is the negative space of the whole clock, minus frame)
 
