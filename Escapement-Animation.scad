@@ -1,5 +1,5 @@
-use <MCAD/involute_gears.scad>
-include <clockworkLibrary.scad> // version 0.3
+use <mcad/involute_gears.scad>
+include <clockworkLibrary.scad> // version 9
 
 // Overall Parameters
 scale=1;					// scaling factor for the whole model
