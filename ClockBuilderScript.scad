@@ -23,17 +23,19 @@ numberSpokes=5;				// number of spokes in the drum
 
 
 // Escapement Wheel Parameters
-numberTeeth=30; 			// number of teeth in the escapement wheel
-toothLength=12*scale; 			// length of the tooth along longest face and to inner radius of the wheel
+numberTeeth=15; 			// number of teeth in the escapement wheel
+toothLength=15*scale; 			// length of the tooth along longest face and to inner radius of the wheel
 toothLean=15; 				// how much the tooth leans over, clockwise, in degrees
 toothSharpness=10; 			// the angle between the two side of each tooth
+clubSize=0.2; 				// relative size of the club on the teeth 
+clubAngle=22.5; 				// impulse face angle
 
 
 // Escapement Parameters
-toothSpan=7.5; 				// how many teeth the escapement spans
-faceAngle=6; 				// how many degrees the impulse face covers seen from the hub of the escapement wheel
-armAngle=26; 				// angle of the escapement's arms
-maxSwing=6;				// maximum swing of the escapement, in degrees
+toothSpan=3.5; 				// how many teeth the escapement spans
+faceAngle=8; 				// how many degrees the impulse face covers seen from the hub of the escapement wheel
+armAngle=24; 				// angle of the escapement's arms
+maxSwing=8;				// maximum swing of the escapement, in degrees
 armWidth=4*scale; 			// width of the escapement's arms
 hubWidth=10*scale; 			// width of the escapement's hub
 hubHeight=thickness; 			// thickness of the escapement's hub
@@ -327,7 +329,9 @@ module pinion2(negativeSpace=false)
 		spoke_width=			spokeWidth,
 		notch_angle=			correction2,
 		negative_space=			negativeSpace,
-		space=				negativeMargin);
+		space=				negativeMargin, 
+		clubSize=				clubSize,
+		clubAngle=				clubAngle);
 }
 
 module pinion3(negativeSpace=false)
@@ -397,7 +401,9 @@ module pinion3(negativeSpace=false)
 		spoke_width=			spokeWidth,
 		notch_angle=			correction3,
 		negative_space=			negativeSpace,
-		space=				negativeMargin);
+		space=				negativeMargin, 
+		clubSize=				clubSize,
+		clubAngle=				clubAngle);
 }
 
 module pinion4(negativeSpace=false)
@@ -467,7 +473,9 @@ module pinion4(negativeSpace=false)
 		spoke_width=			spokeWidth,
 		notch_angle=			correction4,
 		negative_space=			negativeSpace,
-		space=				negativeMargin);
+		space=				negativeMargin, 
+		clubSize=				clubSize,
+		clubAngle=				clubAngle);
 }
 
 module pinion5(negativeSpace=false)
@@ -537,7 +545,9 @@ module pinion5(negativeSpace=false)
 		spoke_width=			spokeWidth,
 		notch_angle=			correction5,
 		negative_space=			negativeSpace,
-		space=				negativeMargin);
+		space=				negativeMargin, 
+		clubSize=				clubSize,
+		clubAngle=				clubAngle);
 }
 
 module pinion6(negativeSpace=false)
@@ -607,7 +617,9 @@ module pinion6(negativeSpace=false)
 		spoke_width=			spokeWidth,
 		notch_angle=			correction6,
 		negative_space=			negativeSpace,
-		space=				negativeMargin);
+		space=				negativeMargin, 
+		clubSize=				clubSize,
+		clubAngle=				clubAngle);
 }
 
 module pinion7(negativeSpace=false)
@@ -677,7 +689,9 @@ module pinion7(negativeSpace=false)
 		spoke_width=			spokeWidth,
 		notch_angle=			correction7,
 		negative_space=			negativeSpace,
-		space=				negativeMargin);
+		space=				negativeMargin, 
+		clubSize=				clubSize,
+		clubAngle=				clubAngle);
 }
 
 module pinion8(negativeSpace=false)
@@ -747,7 +761,9 @@ module pinion8(negativeSpace=false)
 		spoke_width=			spokeWidth,
 		notch_angle=			correction8,
 		negative_space=			negativeSpace,
-		space=				negativeMargin);
+		space=				negativeMargin, 
+		clubSize=				clubSize,
+		clubAngle=				clubAngle);
 }
 
 
@@ -786,7 +802,9 @@ module pinion9(negativeSpace=false)
 		spoke_width=			spokeWidth,
 		notch_angle=			correction9,
 		negative_space=			negativeSpace,
-		space=				negativeMargin);
+		space=				negativeMargin, 
+		clubSize=				clubSize,
+		clubAngle=				clubAngle);
 }
 
 module escapementPendulum(sleeve_level,sleeve_extension,negativeSpace=false)
@@ -808,7 +826,22 @@ module escapementPendulum(sleeve_level,sleeve_extension,negativeSpace=false)
 
 		if(negativeSpace==true) {translate([0,0,-negativeMargin])ring(sleeve_radius+negativeMargin,0,thickness+sleeve_extension+2*negativeMargin);}
 
-		escapement(escapement_radius,thickness,faceAngle,armAngle,armWidth,numberTeeth,toothSpan,hubWidth,hubHeight,bore_radius,negativeSpace,negativeMargin,maxSwing);
+		escapement(
+			escapement_radius,
+			thickness,
+			faceAngle,
+			armAngle,
+			armWidth,
+			numberTeeth,
+			toothSpan,
+			hubWidth,
+			hubHeight,
+			bore_radius,
+			negativeSpace,
+			negativeMargin,
+			maxSwing,
+			entryPalletAngle=45-toothLean+clubAngle, 
+			exitPalletAngle=45-toothLean+clubAngle);
 	}
 }
 
