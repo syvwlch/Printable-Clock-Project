@@ -1,7 +1,7 @@
 // Clock geartrain
 
-use <MCAD/involute_gears.scad>
-include <clockworkLibrary.scad> // version 0.6
+use <mcad/involute_gears.scad>
+include <clockworkLibrary.scad> // version 9
 
 // Objects
 v=0;// only for assembly visualization, keep at zero for printable parts
