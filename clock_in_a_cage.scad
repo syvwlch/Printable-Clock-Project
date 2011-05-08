@@ -102,15 +102,18 @@ RpH=(np1H+nsH)/np1H;// planet to planet-carrier ratio
 RH=R1H*R2H;// total sun to ring ratio
 echo(str(RH, " hours on face"));
 
-
-module planets()
+module trapezoidkey(base, top, height, thickness) 
 {
-	for (i=[0:1])
-		translate([-15+30*i,0,0])planetH();
-	for (i=[0:1])
-		translate([-15+30*i,-30,0])planetH();
-	for (i=[0:2])
-		translate([-30+30*i,30,0])planetM();
+	linear_extrude(height=thickness, center=true, convexity=10, twist=0) 
+	polygon(
+		points=	[
+				[-base/2, -height/2], 
+				[base/2,-height/2],
+				[top/2, height/2],
+				[-top/2, height/2] 
+				],
+		paths=	[[0,1,2,3]], 
+		convexity=10);
 }
 
 module escapeWheel()
@@ -241,6 +244,16 @@ module arm()
 	}
 }
 
+module planets()
+{
+	for (i=[0:1])
+		translate([-15+30*i,0,0])planetH();
+	for (i=[0:1])
+		translate([-15+30*i,-30,0])planetH();
+	for (i=[0:2])
+		translate([-30+30*i,30,0])planetM();
+}
+
 module sunM()
 {
 	mirror([0,0,1])
@@ -270,12 +283,12 @@ module ringM()
 		{
 			rotate(90+i*360/cageArms,[0,0,1])
 			translate([-0.5,0,0])
+			translate([d1/2,-cageWidth/2-th,-t1])
 			difference()
 			{
-				translate([d1/2,-cageWidth/2-th,-t1])
 				cube([socketLength,cageWidth+2*th,t+2*th]);
 				
-				translate([d1/2,-cageWidth/2,th-t1])
+				translate([0,th,th])
 				cube([socketLength+1,cageWidth,t]);
 			}
 		}
@@ -318,12 +331,12 @@ module ringH()
 		{
 			rotate(90+i*360/cageArms,[0,0,1])
 			translate([-0.5,0,0])
+			translate([d1/2,-cageWidth/2-th,-t1])
 			difference()
 			{
-				translate([d1/2,-cageWidth/2-th,-t1])
 				cube([socketLength,cageWidth+2*th,t+2*th]);
 				
-				translate([d1/2,-cageWidth/2,th-t1])
+				translate([0,th,th])
 				cube([socketLength+1,cageWidth,t]);
 			}
 		}
