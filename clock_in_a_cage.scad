@@ -4,9 +4,10 @@ use <mcad/involute_gears.scad>
 include <clockworkLibrary.scad> // version 9
 
 // Objects
-v=0;// only for assembly visualization, keep at zero for printable parts
-//v=-1.5;
-assembly();// visualization with animation; ring plates removed
+v=0;					// only for assembly visualization, keep at zero for printable parts
+					//v=-1.5;
+
+assembly();				// visualization with animation
 //mirror([0,0,1]) sunM();
 //ringM();
 //ringH();
@@ -22,91 +23,195 @@ assembly();// visualization with animation; ring plates removed
 
 // Overall Parameters 
 
-explodeZ=20;				// distance in Z between objects in exploded view
-explodeR=10;				// distance radially between objects in exploded view
-joinfactor=0.25;				// clearance for dove-tail joinery
+explodeZ=0;					// distance in Z between objects in exploded view
+explodeR=0;					// distance radially between objects in exploded view
+joinfactor=0.25;					// clearance for dove-tail joinery
 
-cageArms=6;				// number of arms of the cage
-cageLength=40;				// length of the arms of the cage
-cageWidth=2;				// width of the arms of the cage
-socketLength=5;				// length of arm sockets
-th=1; 					// thickness of arm sockets
-overlap=20;				// overlap from outer rings to hold on ring2H
-secondLength=cageLength-4*cageWidth;		// length of the second hand
-minuteLength=0.6*secondLength;	// length of the minute hand
-hourLength=0.3*secondLength;	// length og the hour hand
-handWidth=5;				// width of the hands
+cageArms=6;					// number of arms of the cage
+cageLength=40;					// length of the arms of the cage
+cageWidth=2;					// width of the arms of the cage
+socketLength=5;					// length of arm sockets
+th=1; 						// thickness of arm sockets
+overlap=20;					// overlap from outer rings to hold on ring2H
+secondLength=cageLength-4*cageWidth;	// length of the second hand
+minuteLength=0.6*secondLength;		// length of the minute hand
+hourLength=0.3*secondLength;		// length og the hour hand
+handWidth=5;					// width of the hands
 
 // Escapement Wheel Parameters
 radius=40;
-numberTeeth=15; // number of teeth in the escapement wheel
-toothLength=15; // length of the tooth along longest face and to inner radius of the wheel
-toothLean=15; // how much the tooth leans over, clockwise, in degrees
-toothSharpness=10; // the angle between the two side of each tooth
-clubSize=0.2; // relative size of the club on the teeth 
-clubAngle=22.5; // impulse face angle
-rimWidth=4; // width of the rim
-drumHeight=12; // height of the drum on the escapement
+numberTeeth=15; 				// number of teeth in the escapement wheel
+toothLength=15; 					// length of the tooth along longest face and to inner radius of the wheel
+toothLean=15; 					// how much the tooth leans over, clockwise, in degrees
+toothSharpness=10; 				// the angle between the two side of each tooth
+clubSize=0.2; 					// relative size of the club on the teeth 
+clubAngle=22.5; 					// impulse face angle
+rimWidth=4; 					// width of the rim
+drumHeight=12; 					// height of the drum on the escapement
 numberSpokes=3;
 spokeWidth=handWidth;
 
 // Escapement Parameters
-toothSpan=3.5; // how many teeth the escapement spans
-faceAngle=6; // how many degrees the impulse face covers seen from the hub of the escapement wheel
-armAngle=26; // angle of the escapement's arms
-armWidth=4; // width of the escapement's arms
-hubWidth=5; // width of the escapement's hub
-bore=3; // radius of the shaft
+toothSpan=3.5; 					// how many teeth the escapement spans
+faceAngle=6; 					// how many degrees the impulse face covers seen from the hub of the escapement wheel
+armAngle=26; 					// angle of the escapement's arms
+armWidth=4; 					// width of the escapement's arms
+hubWidth=5; 					// width of the escapement's hub
+bore=3; 						// radius of the shaft
 
 // Gear Parameters
-d1=80;// diameter of lower ring
-t=4;// thickness of all gears
-t1=1.2;// thickness of ring faces
-b=0.25;// backlash
-c=0.2;// clearance
-pa=20;// pressure angle
-s=0.4;// vertical clearance
-td=0.8;// thickness of planet disk
-pd=1.1;// planet disk diameter / pitch diameter
-dp=0.85;// ring gear diameter / outside ring diameter
-w=1.4;// wall thickness of shaft tubes
-wc=0.5;// radial clearance between shaft tubes
-hh=10+t1+t;// height of hour shaft
-dh=5;// difference in height between shafts
+d1=80;			// diameter of lower ring
+t=4;				// thickness of all gears
+t1=1.2;			// thickness of ring faces
+b=0.25;			// backlash
+c=0.2;			// clearance
+pa=20;			// pressure angle
+s=0.4;			// vertical clearance
+td=0.8;			// thickness of planet disk
+pd=1.1;			// planet disk diameter / pitch diameter
+dp=0.85;			// ring gear diameter / outside ring diameter
+w=1.4;			// wall thickness of shaft tubes
+wc=0.5;			// radial clearance between shaft tubes
+hh=10+t1+t;		// height of hour shaft
+dh=5;			// difference in height between shafts
 
 // mintues to hours 1:60
-nsM=19;// number of teeth on sun (lower)
-np1M=20;// number of teeth on lower planet
-deltaM=-2;// difference in teeth between upper and lower
+nsM=19;			// number of teeth on sun (lower)
+np1M=20;			// number of teeth on lower planet
+deltaM=-2;			// difference in teeth between upper and lower
 
 // hours to half-day 1:12
-nsH=12;// number of teeth on sun (lower)
-np1H=16;// number of teeth on lower planet
-deltaH=-8;// difference in teeth between upper and lower
+nsH=12;			// number of teeth on sun (lower)
+np1H=16;			// number of teeth on lower planet
+deltaH=-8;			// difference in teeth between upper and lower
 
 //--------- Don't edit below here unless you know what you're doing.
 
-nr1M=nsM+2*np1M;// number of teeth on lower ring
-pitchM=nr1M/(d1*dp);// diametral pitch of all gears
+nr1M=nsM+2*np1M;	// number of teeth on lower ring
+pitchM=nr1M/(d1*dp);	// diametral pitch of all gears
 nr2M=nr1M+deltaM;
 np2M=np1M+deltaM;
 
-R1M=(1+nr1M/nsM);// sun to planet-carrier ratio
-R2M=nr2M/((nsM+np1M)*(1-np2M/np1M));// planet-carrier to ring ratio
-RpM=(np1M+nsM)/np1M;// planet to planet-carrier ratio
-RM=R1M*R2M;// total sun to ring ratio
+R1M=(1+nr1M/nsM);					// sun to planet-carrier ratio
+R2M=nr2M/((nsM+np1M)*(1-np2M/np1M));	// planet-carrier to ring ratio
+RpM=(np1M+nsM)/np1M;				// planet to planet-carrier ratio
+RM=R1M*R2M;						// total sun to ring ratio
 echo(str(RM, " minutes per hour"));
 
-nr1H=nsH+2*np1H;// number of teeth on lower ring
-pitchH=nr1H/(d1*dp);// diametral pitch of all gears
+nr1H=nsH+2*np1H;					// number of teeth on lower ring
+pitchH=nr1H/(d1*dp);					// diametral pitch of all gears
 nr2H=nr1H+deltaH;
 np2H=np1H+deltaH;
 
-R1H=(1+nr1H/nsH);// sun to planet-carrier ratio
-R2H=nr2H/((nsH+np1H)*(1-np2H/np1H));// planet-carrier to ring ratio
-RpH=(np1H+nsH)/np1H;// planet to planet-carrier ratio
-RH=R1H*R2H;// total sun to ring ratio
+R1H=(1+nr1H/nsH);					// sun to planet-carrier ratio
+R2H=nr2H/((nsH+np1H)*(1-np2H/np1H));		// planet-carrier to ring ratio
+RpH=(np1H+nsH)/np1H;				// planet to planet-carrier ratio
+RH=R1H*R2H;						// total sun to ring ratio
 echo(str(RH, " hours on face"));
+
+
+sunM_z=		0;						// z posiiton of the part
+
+ringM_z=		sunM_z-explodeZ;				// z posiiton of the part
+
+escapeWheel_z=	ringM_z-2*th-explodeZ;			// z position of the part
+
+escapement_z=	escapeWheel_z-t;				// z position of the part
+
+planetM_z=		ringM_z+explodeZ;			// z position of the part
+
+sunH_z=		2*t+2*s+td+2*explodeZ;		// z position of the part
+
+ringH_z=		sunH_z+2*t1+2*s+2*explodeZ;	// z position of the part
+
+planetH_z=		ringH_z+explodeZ;			// z position of the part
+
+ring2H_z=		sunH_z+ringH_z;				// z position of the part
+
+
+
+module assembly()
+{
+	color([0.5,0.5,0.5])
+	translate([0,0,ringM_z])
+	ringM();
+
+	translate([0,0,ringM_z])
+	for (i=[0:cageArms-1])
+	{
+		rotate([0,0,90+i*360/cageArms])
+		translate([d1/2+explodeR,0,-cageWidth/2])
+		{
+			arm();
+
+			translate([cageLength+explodeR,0,0])
+			leg();
+		}
+	}
+
+	translate([0,0,ringH_z])
+	for (i=[0:cageArms-1])
+	{
+		rotate([0,0,90+i*360/cageArms])
+		translate([d1/2+explodeR,0,-cageWidth/2])
+		{
+			arm();
+
+			translate([cageLength+explodeR,0,0])
+			leg();
+		}
+	}
+
+	translate([0,0,sunM_z])
+	rotate([0,0,180/nsM+360*RH*RM*$t])
+	color([1,0,0])
+	sunM();
+
+	translate([0,0,escapeWheel_z])
+	rotate([0,0,180/nsM+360*RH*RM*$t])
+	rotate(90-180/nsM,[0,0,1])
+	mirror([0,0,1])
+	color([1,0,0])
+	escapeWheel();
+
+	translate([0,0,escapement_z])
+	mirror([0,0,1])
+	placeEscapement(180,radius,numberTeeth,toothSpan) 
+	color([0,1,1])
+	escape();
+
+	translate([0,0,planetM_z])
+	for (i=[0:2])
+	{
+		rotate([0,0,120*i+360*RH*R2M*$t])
+		translate([(nsM+np1M)/pitchM/2,0,0])
+		rotate([0,0,-120*i-360*RH*R2M*(1+RpM)*$t])
+		planetM();
+	}
+
+	translate([0,0,sunH_z])
+	rotate([0,0,360*RH*$t])
+	color([0,1,0])
+	sunH();
+
+	translate([0,0,ringH_z])
+	color([0.5,0.5,0.5])
+	ringH();
+
+	translate([0,0,planetH_z])
+	for (i=[0:3])
+	{
+		rotate([0,0,90*i+360*R2H*$t])
+		translate([(nsH+np1H)/pitchH/2,0,0])
+		rotate([0,0,-90*i-360*R2H*(1+RpH)*$t])
+		planetH();
+	}
+
+	translate([0,0,ring2H_z])
+	rotate([0,0,360*$t])
+	color([0,0,1])
+	ring2H();
+}
 
 module trapezoidkey(base, top, height, thickness) 
 {
@@ -120,140 +225,6 @@ module trapezoidkey(base, top, height, thickness)
 				],
 		paths=	[[0,1,2,3]], 
 		convexity=10);
-}
-
-module escapeWheel()
-{
-	union()
-	{
-		ring(radius,radius-toothLength,t);
-
-		difference()
-		{
-			cylinder(drumHeight+2*t,hubWidth,hubWidth);
-			translate([0,0,-1])
-			cylinder(drumHeight+2*t+2,bore,bore,$fn=6);
-		}
-
-		translate([0,0,0])
-		escapementWheel(
-			radius=radius, 
-			rimWidth=rimWidth,
-			drumHeight=drumHeight,
-			toothThickness=2*t,
-			numberTeeth=numberTeeth,
-			toothLength=toothLength,
-			toothLean=toothLean,
-			toothSharpness=toothSharpness,
-			numberSpokes=numberSpokes,
-			spokeWidth=spokeWidth,
-			hubWidth=hubWidth,
-			bore=bore,
-			clubSize=clubSize,
-			clubAngle=clubAngle);
-
-		translate([radius-toothLength,-handWidth/2,0])
-		cube([d1/2+secondLength-(radius-toothLength),handWidth,t]);
-	}
-}
-
-module escape()
-{
-	escapement( 
-		radius=radius, 
-		thickness=t,
-		faceAngle=faceAngle,
-		armAngle=armAngle,
-		armWidth=armWidth,
-		numberTeeth=numberTeeth,
-		toothSpan=toothSpan,
-		hubWidth=hubWidth,
-		hubHeight=t+drumHeight,
-		bore=bore,
-		negative_space=false,
-		space=0.1,
-		max_swing=6,
-		entryPalletAngle=45-toothLean+clubAngle, 
-		exitPalletAngle=45-toothLean+clubAngle); 
-}
-
-module assembly()
-{
-	color([0.5,0.5,0.5])
-	translate([0,0,-explodeZ])
-	ringM();
-
-	for (i=[0:cageArms-1])
-	{
-		rotate([0,0,90+i*360/cageArms])
-		translate([d1/2+explodeR,0,-cageWidth/2])
-		{
-			arm();
-
-			translate([cageLength+explodeR,0,0])
-			leg();
-		}
-	}
-
-	translate([0,0,2*(t+t1+s)+td+4*explodeZ])
-	for (i=[0:cageArms-1])
-	{
-		rotate([0,0,90+i*360/cageArms])
-		translate([d1/2+explodeR,0,-cageWidth/2])
-		{
-			arm();
-
-			translate([cageLength+explodeR,0,0])
-			leg();
-		}
-	}
-
-	rotate([0,0,180/nsM+360*RH*RM*$t])
-	color([1,0,0])
-	{
-		sunM();
-
-		rotate(90-180/nsM,[0,0,1])
-		translate([0,0,-2*th-2*explodeZ])
-		mirror([0,0,1])
-		escapeWheel();
-	}
-
-	color([0,1,1])
-	translate([0,0,-t-2*th-2*explodeZ])
-	mirror([0,0,1])
-	placeEscapement(180,radius,numberTeeth,toothSpan) 
-	escape();
-
-	for (i=[0:2])
-	{
-		rotate([0,0,120*i+360*RH*R2M*$t])
-		translate([(nsM+np1M)/pitchM/2,0,explodeZ])
-		rotate([0,0,-120*i-360*RH*R2M*(1+RpM)*$t])
-		planetM();
-	}
-
-	translate([0,0,2*t+2*s+td+0.1+2*explodeZ])
-	rotate([0,0,360*RH*$t])
-	color([0,1,0])
-	sunH();
-
-	translate([0,0,2*(t+t1+s)+td+4*explodeZ])
-	color([0.5,0.5,0.5])
-	ringH();
-
-	for (i=[0:3])
-	{
-		rotate([0,0,90*i+360*R2H*$t])
-		translate([(nsH+np1H)/pitchH/2,0,2*(t+t1+s)+td+5*explodeZ])
-		rotate([0,0,-90*i-360*R2H*(1+RpH)*$t])
-		planetH();
-	}
-
-	translate([0,0,4*(t+s)+2*(t1+td)+0.1+6*explodeZ])
-	rotate([0,0,360*$t])
-	color([0,0,1])
-	ring2H();
 }
 
 module arm()
@@ -338,6 +309,61 @@ module leg()
 			height=2*cageWidth, 
 			thickness=t+t1+v);
 	}
+}
+
+module escapeWheel()
+{
+	union()
+	{
+		ring(radius,radius-toothLength,t);
+
+		difference()
+		{
+			cylinder(drumHeight+2*t,hubWidth,hubWidth);
+			translate([0,0,-1])
+			cylinder(drumHeight+2*t+2,bore,bore,$fn=6);
+		}
+
+		translate([0,0,0])
+		escapementWheel(
+			radius=radius, 
+			rimWidth=rimWidth,
+			drumHeight=drumHeight,
+			toothThickness=2*t,
+			numberTeeth=numberTeeth,
+			toothLength=toothLength,
+			toothLean=toothLean,
+			toothSharpness=toothSharpness,
+			numberSpokes=numberSpokes,
+			spokeWidth=spokeWidth,
+			hubWidth=hubWidth,
+			bore=bore,
+			clubSize=clubSize,
+			clubAngle=clubAngle);
+
+		translate([radius-toothLength,-handWidth/2,0])
+		cube([d1/2+secondLength-(radius-toothLength),handWidth,t]);
+	}
+}
+
+module escape()
+{
+	escapement( 
+		radius=radius, 
+		thickness=t,
+		faceAngle=faceAngle,
+		armAngle=armAngle,
+		armWidth=armWidth,
+		numberTeeth=numberTeeth,
+		toothSpan=toothSpan,
+		hubWidth=hubWidth,
+		hubHeight=t+drumHeight,
+		bore=bore,
+		negative_space=false,
+		space=0.1,
+		max_swing=6,
+		entryPalletAngle=45-toothLean+clubAngle, 
+		exitPalletAngle=45-toothLean+clubAngle); 
 }
 
 module planets()
