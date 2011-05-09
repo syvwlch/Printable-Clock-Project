@@ -128,7 +128,7 @@ planetH_z=		ringH_z+explodeZ;			// z position of the part
 
 ring2H_z=		sunH_z+ringH_z;				// z position of the part
 
-ringCap_z=		ring2H_z+t-t1+s+explodeZ;			// z position of the part
+ringCap_z=		ring2H_z+t-t1+s+explodeZ;		// z position of the part
 
 
 
@@ -555,7 +555,7 @@ module ring_local(n,pitch)
 rotate([180,0,0])translate([0,0,-t])
 difference()
 {
-	cylinder(r=n/pitch/2/dp,h=t+t1+v);
+	cylinder(r=d1/2,h=t+t1+v);
 	translate([0,0,-1])
 	gear(number_of_teeth=n,
 		diametral_pitch=pitch,
