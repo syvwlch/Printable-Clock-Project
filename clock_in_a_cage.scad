@@ -25,6 +25,8 @@ assembly();				// visualization with animation
 
 explodeZ=0;					// distance in Z between objects in exploded view
 explodeR=0;					// distance radially between objects in exploded view
+showCage=true;					// toggle to show cage or not in assembly()
+
 joinfactor=0.25;					// clearance for dove-tail joinery
 
 cageArms=6;					// number of arms of the cage
@@ -138,43 +140,46 @@ module assembly()
 	translate([0,0,ringM_z])
 	ringM();
 
-	translate([0,0,ringFoot_z])
-	for (i=[0:cageArms-1])
+	if (showCage==true)
 	{
-		rotate([0,0,90+i*360/cageArms])
-		translate([d1/2+explodeR,0,-cageWidth/2])
+		translate([0,0,ringFoot_z])
+		for (i=[0:cageArms-1])
 		{
-			arm();
-
-			translate([cageLength+explodeR,0,0])
-			color([1,1,0])
-			leg();
+			rotate([0,0,90+i*360/cageArms])
+			translate([d1/2+explodeR,0,-cageWidth/2])
+			{
+				arm();
+	
+				translate([cageLength+explodeR,0,0])
+				color([1,1,0])
+				leg();
+			}
 		}
-	}
-
-	translate([0,0,ringM_z])
-	for (i=[0:cageArms-1])
-	{
-		rotate([0,0,90+i*360/cageArms])
-		translate([d1/2+explodeR,0,-cageWidth/2])
-		arm();
-	}
-
-
-	translate([0,0,ringH_z])
-	for (i=[0:cageArms-1])
-	{
-		rotate([0,0,90+i*360/cageArms])
-		translate([d1/2+explodeR,0,-cageWidth/2])
-		arm();
-	}
-
-	translate([0,0,ringCap_z])
-	for (i=[0:cageArms-1])
-	{
-		rotate([0,0,90+i*360/cageArms])
-		translate([d1/2+explodeR,0,-cageWidth/2])
-		arm();
+	
+		translate([0,0,ringM_z])
+		for (i=[0:cageArms-1])
+		{
+			rotate([0,0,90+i*360/cageArms])
+			translate([d1/2+explodeR,0,-cageWidth/2])
+			arm();
+		}
+	
+	
+		translate([0,0,ringH_z])
+		for (i=[0:cageArms-1])
+		{
+			rotate([0,0,90+i*360/cageArms])
+			translate([d1/2+explodeR,0,-cageWidth/2])
+			arm();
+		}
+	
+		translate([0,0,ringCap_z])
+		for (i=[0:cageArms-1])
+		{
+			rotate([0,0,90+i*360/cageArms])
+			translate([d1/2+explodeR,0,-cageWidth/2])
+			arm();
+		}
 	}
 
 	translate([0,0,sunM_z])
