@@ -110,27 +110,27 @@ RH=R1H*R2H;						// total sun to ring ratio
 echo(str(RH, " hours on face"));
 
 
-sunM_z=		0;						// z posiiton of the part
+escapement_z=	0;						// z position of the part
 
-ringM_z=		sunM_z-explodeZ;				// z posiiton of the part
+escapeWheel_z=	escapement_z+t;				// z position of the part
 
-escapeWheel_z=	ringM_z-2*th-explodeZ;			// z position of the part
+ringM_z=		escapeWheel_z+2*th+explodeZ;	// z posiiton of the part
 
-escapement_z=	escapeWheel_z-t;				// z position of the part
+sunM_z=		ringM_z+explodeZ;			// z posiiton of the part
 
 planetM_z=		ringM_z+explodeZ;			// z position of the part
 
-sunH_z=		2*t+2*s+td+2*explodeZ;		// z position of the part
+sunH_z=		ringM_z+2*t+2*s+td+2*explodeZ;		// z position of the part
 
 ringH_z=		sunH_z+2*t1+2*s+2*explodeZ;	// z position of the part
 
 planetH_z=		ringH_z+explodeZ;			// z position of the part
 
-ring2H_z=		sunH_z+ringH_z;				// z position of the part
+ring2H_z=		sunH_z+ringH_z-ringM_z;		// z position of the part
 
 ringCap_z=		ring2H_z+t-t1+s+explodeZ;		// z position of the part
 
-
+ringFoot_z=		escapement_z-drumHeight-t-(t+t1);	// z position of the part
 
 module assembly()
 {
@@ -138,7 +138,7 @@ module assembly()
 	translate([0,0,ringM_z])
 	ringM();
 
-	translate([0,0,ringM_z])
+	translate([0,0,ringFoot_z])
 	for (i=[0:cageArms-1])
 	{
 		rotate([0,0,90+i*360/cageArms])
@@ -147,9 +147,19 @@ module assembly()
 			arm();
 
 			translate([cageLength+explodeR,0,0])
+			color([1,1,0])
 			leg();
 		}
 	}
+
+	translate([0,0,ringM_z])
+	for (i=[0:cageArms-1])
+	{
+		rotate([0,0,90+i*360/cageArms])
+		translate([d1/2+explodeR,0,-cageWidth/2])
+		arm();
+	}
+
 
 	translate([0,0,ringH_z])
 	for (i=[0:cageArms-1])
@@ -220,6 +230,10 @@ module assembly()
 	translate([0,0,ringCap_z])
 	color([0.5,0.5,0.5])
 	ringCap();
+
+	translate([0,0,ringFoot_z])
+	color([0.5,0.5,0.5])
+	ringCap();
 }
 
 module trapezoidkey(base, top, height, thickness) 
@@ -278,7 +292,7 @@ module arm()
 module leg()
 {
 	legLength=(cageLength+d1/2)*1.125;
-	legThickness=ringCap_z+t+t1+v;
+	legThickness=ringCap_z+t+t1+v-ringFoot_z-8*explodeZ;
 	keyThickness=t+t1+v;
 
 	union()
@@ -534,7 +548,7 @@ module ringCap()
 	union()
 	{
 		translate([0,0,-t1])
-		ring(d1/2,d1/4,t+t1+v);
+		ring(d1/2,bore,t+t1+v);
 
 		for (i=[0:cageArms-1])
 		{
