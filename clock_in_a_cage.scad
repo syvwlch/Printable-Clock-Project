@@ -36,7 +36,7 @@ overlap=20;					// overlap from outer rings to hold on ring2H
 secondLength=cageLength-4*cageWidth;	// length of the second hand
 minuteLength=0.6*secondLength;		// length of the minute hand
 hourLength=0.3*secondLength;		// length og the hour hand
-handWidth=5;					// width of the hands
+handWidth=15;					// width of the hands
 
 // Escapement Wheel Parameters
 radius=40;
@@ -128,6 +128,8 @@ planetH_z=		ringH_z+explodeZ;			// z position of the part
 
 ring2H_z=		sunH_z+ringH_z;				// z position of the part
 
+ringCap_z=		ring2H_z+t-t1+s+explodeZ;			// z position of the part
+
 
 
 module assembly()
@@ -154,12 +156,15 @@ module assembly()
 	{
 		rotate([0,0,90+i*360/cageArms])
 		translate([d1/2+explodeR,0,-cageWidth/2])
-		{
-			arm();
+		arm();
+	}
 
-			translate([cageLength+explodeR,0,0])
-			leg();
-		}
+	translate([0,0,ringCap_z])
+	for (i=[0:cageArms-1])
+	{
+		rotate([0,0,90+i*360/cageArms])
+		translate([d1/2+explodeR,0,-cageWidth/2])
+		arm();
 	}
 
 	translate([0,0,sunM_z])
@@ -211,6 +216,10 @@ module assembly()
 	rotate([0,0,360*$t])
 	color([0,0,1])
 	ring2H();
+
+	translate([0,0,ringCap_z])
+	color([0.5,0.5,0.5])
+	ringCap();
 }
 
 module trapezoidkey(base, top, height, thickness) 
@@ -269,45 +278,48 @@ module arm()
 module leg()
 {
 	legLength=(cageLength+d1/2)*1.125;
+	legThickness=ringCap_z+t+t1+v;
+	keyThickness=t+t1+v;
+
 	union()
 	{
 		translate([0,3*cageWidth,0])
 		rotate(90,[0,0,1])
-		translate([-3*cageWidth,cageWidth,(t+t1+v)/2])
+		translate([-3*cageWidth,cageWidth,legThickness/2])
 		trapezoidkey(
 			base=2*cageWidth, 
 			top=4*cageWidth, 
 			height=2*cageWidth, 
-			thickness=t+t1+v);
+			thickness=legThickness);
 
 		translate([2*cageWidth,-legLength/2,0])
 		rotate(90,[0,0,1])
-		cube([legLength,2*cageWidth,t+t1+v]);
+		cube([legLength,2*cageWidth,legThickness]);
 
 		translate([1*cageWidth,-legLength/2,0])
 		translate([1*cageWidth,-4*cageWidth,0])
 		rotate(90-30,[0,0,1])
 		difference()
 		{
-			cube([4*cageWidth,6*cageWidth,t+t1+v]);
+			cube([4*cageWidth,6*cageWidth,legThickness]);
 
 			rotate(-90,[0,0,1])
-			translate([-3*cageWidth,cageWidth,(t+t1+v)/2])
+			translate([-3*cageWidth,cageWidth,legThickness/2])
 			trapezoidkey(
 				base=2*cageWidth+joinfactor, 
 				top=4*cageWidth+joinfactor, 
 				height=2*cageWidth+joinfactor, 
-				thickness=t+t1+v+2);
+				thickness=legThickness+2);
 		}
 
 		translate([1*cageWidth,legLength/2,0])
-		translate([-0*cageWidth,0*cageWidth,(t+t1+v)/2])
+		translate([-0*cageWidth,0*cageWidth,legThickness/2])
 		rotate(0+30,[0,0,1])
 		trapezoidkey(
 			base=2*cageWidth, 
 			top=4*cageWidth, 
 			height=2*cageWidth, 
-			thickness=t+t1+v);
+			thickness=legThickness);
 	}
 }
 
@@ -515,6 +527,28 @@ union()
 		backlash=b,
 		clearance=c,
 		pressure_angle=pa);
+}
+
+module ringCap()
+{
+	union()
+	{
+		translate([0,0,-t1])
+		ring(d1/2,d1/4,t+t1+v);
+
+		for (i=[0:cageArms-1])
+		{
+			rotate(90+i*360/cageArms,[0,0,1])
+			translate([d1/2-0.5,0,0])
+			rotate(-90,[0,0,1])
+			translate([0,cageWidth,(t+t1+v)/2-t1])
+			trapezoidkey(
+				base=2*cageWidth, 
+				top=4*cageWidth, 
+				height=2*cageWidth, 
+				thickness=t+t1+v);
+		}
+	}
 }
 
 module ring_local(n,pitch)
