@@ -5,3 +5,5 @@ There have been 3D-printable clocks before, but as far as I know, this is the fi
 I am very grateful for the support and assistance from the Maker community over at Thingiverse.com, for MakerBot Industries gracious offer of a free 3D printer in support of this project.
 
 In particular, Thingiverse users rustedrobot, emmet, ssd, barrychuck and MakerBlock have been invaluable, providing detailed feedback and insight on the various prototypes they printed out.
+
+UPDATE: TheRuttmeister's print of TestJig #2 has passed all four tests. Looks like we have a working, printable escapement design. Major milestone passed!
