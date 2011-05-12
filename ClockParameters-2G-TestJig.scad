@@ -17,6 +17,7 @@ CC-A-SA licensed.*/
 
 	drumHeight=2*thickness; 	// height of the drum (along z), only for drum pinion
 
+	boltHeadRadius=3*scale;	// radius for the counter-sunk holes in the frame for bolt heads
 
 // Command Parameters
 	showAssembly=	true;		// true to show the whole clock, assembled
@@ -170,6 +171,7 @@ module frontFrame()
 	{
 		rotate((showAssembly==true ? 180 : 0),[1,0,0])
 		translate([0,0,(showAssembly==true ? -thickness : 0)])
+		union()
 		placeWheel(fold_angle,axis_separation,0)
 		{
 			rotate(180,[0,0,1])
@@ -222,46 +224,61 @@ module backFrame()
 
 	rotate((showToPrint==true ? 45 : 0),[0,0,1])
 	translate([(showToPrint==true ? printLimit/4 : 0),0,(showAssembly==true ? -drumThickness-thickness-0.5 : 0)])
+	union()
 	placeWheel(fold_angle,axis_separation,0)
 	{
 		rotate(180,[0,0,1])
 		{
-			ring(sleeve_radius,bore_radius,addFrameThickness+thickness);
+			ring(sleeve_radius,boltHeadRadius,thickness,30,6);
+
+			translate([0,0,thickness])
+			ring(sleeve_radius,bore_radius,addFrameThickness);
 	
-			translate([bore_radius,-sleeve_radius/2,0])
-			cube([axis_separation-2*bore_radius,sleeve_radius,thickness]);
+			translate([boltHeadRadius,-sleeve_radius/2,0])
+			cube([axis_separation-2*boltHeadRadius,sleeve_radius,thickness]);
 	
 			rotate(-60,[0,0,1])
-			translate([bore_radius,-sleeve_radius/2,0])
-			cube([axis_separation-2*bore_radius,sleeve_radius,thickness]);
+			translate([boltHeadRadius,-sleeve_radius/2,0])
+			cube([axis_separation-2*boltHeadRadius,sleeve_radius,thickness]);
 	
 			rotate(-60,[0,0,1])
 			translate([axis_separation,0,0])
-			ring(sleeve_radius,bore_radius,addFrameThickness+deltaZ+thickness+0.5);
+			ring(sleeve_radius,boltHeadRadius,thickness,30,6);
+
+			rotate(-60,[0,0,1])
+			translate([axis_separation,0,thickness])
+			ring(sleeve_radius,bore_radius,addFrameThickness+deltaZ+0.5);
 	
 			rotate(60,[0,0,1])
-			translate([bore_radius,-sleeve_radius/2,0])
-			cube([axis_separation-2*bore_radius,sleeve_radius,thickness]);
+			translate([boltHeadRadius,-sleeve_radius/2,0])
+			cube([axis_separation-2*boltHeadRadius,sleeve_radius,thickness]);
 		}
 	
 		rotate(180,[0,0,1])
 		{
-			ring(sleeve_radius,bore_radius,addFrameThickness+thickness);
+			ring(sleeve_radius,boltHeadRadius,thickness,30,6);
+
+			translate([0,0,thickness])
+			ring(sleeve_radius,bore_radius,addFrameThickness);
 	
-			translate([bore_radius,-sleeve_radius/2,0])
-			cube([axis_separation-2*bore_radius,sleeve_radius,thickness]);
+			translate([boltHeadRadius,-sleeve_radius/2,0])
+			cube([axis_separation-2*boltHeadRadius,sleeve_radius,thickness]);
 	
 			rotate(-60,[0,0,1])
-			translate([bore_radius,-sleeve_radius/2,0])
-			cube([axis_separation-2*bore_radius,sleeve_radius,thickness]);
+			translate([boltHeadRadius,-sleeve_radius/2,0])
+			cube([axis_separation-2*boltHeadRadius,sleeve_radius,thickness]);
 	
 			rotate(-60,[0,0,1])
 			translate([axis_separation,0,0])
-			ring(sleeve_radius,bore_radius,addFrameThickness+deltaZ+thickness+0.5);
+			ring(sleeve_radius,boltHeadRadius,thickness,30,6);
+
+			rotate(-60,[0,0,1])
+			translate([axis_separation,0,thickness])
+			ring(sleeve_radius,bore_radius,addFrameThickness+deltaZ+0.5);
 	
 			rotate(60,[0,0,1])
-			translate([bore_radius,-sleeve_radius/2,0])
-			cube([axis_separation-2*bore_radius,sleeve_radius,thickness]);
+			translate([boltHeadRadius,-sleeve_radius/2,0])
+			cube([axis_separation-2*boltHeadRadius,sleeve_radius,thickness]);
 		}
 	}
 }
