@@ -20,8 +20,8 @@ CC-A-SA licensed.*/
 	boltHeadRadius=3*scale;	// radius for the counter-sunk holes in the frame for bolt heads
 
 // Command Parameters
-	showAssembly=	true;		// true to show the whole clock, assembled
-	showToPrint=	false;		// true to show only one part, laid out for printing
+	showAssembly=	false;		// true to show the whole clock, assembled
+	showToPrint=	true;		// true to show only one part, laid out for printing
 
 	showLimits=		false;		// in laid out to print mode, show the print volume limits
 	partToPrint=	12;		// in laid out to print mode, which part to show
@@ -279,6 +279,14 @@ module backFrame()
 			rotate(60,[0,0,1])
 			translate([boltHeadRadius,-sleeve_radius/2,0])
 			cube([axis_separation-2*boltHeadRadius,sleeve_radius,thickness]);
+
+			rotate(-60,[0,0,1])
+			translate([axis_separation-3*boltHeadRadius,-(sleeve_radius/2+bore_radius),0])			
+			ring(sleeve_radius,bore_radius,thickness);
+
+			rotate(60,[0,0,1])
+			translate([axis_separation-3*boltHeadRadius,(sleeve_radius/2+bore_radius),0])			
+			ring(sleeve_radius,bore_radius,thickness);
 		}
 	}
 }
