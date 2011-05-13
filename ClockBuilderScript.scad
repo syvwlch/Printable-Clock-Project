@@ -20,6 +20,7 @@ spokeWidth=3*scale; 			// width of the spokes
 
 // Drum Parameters
 numberSpokes=5;				// number of spokes in the drum
+stringHoleRadius=1*scale;		// radius of the holes in the drum
 
 
 // Escapement Wheel Parameters
@@ -240,7 +241,6 @@ module pinion1(negativeSpace=false)
 		negative_space=		negativeSpace)
 	pinionDrum(
 		drum_height=			drumHeight, 
-		number_spokes=			numberSpokes,
 		large_gear_teeth=		abs(ratio1)*pinion1,
 		large_gear_circular_pitch=	circular_pitch1,
 		gear_clearance=			gearClearance,
@@ -256,7 +256,10 @@ module pinion1(negativeSpace=false)
 		gear_thickness=			thickness,
 		sleeve_extension=		sleeveExtension1,
 		spacer=				spacer, 
+		number_spokes=			numberSpokes,
 		spoke_width=			spokeWidth,
+		number_holes=			numberSpokes, 
+		hole_radius=			stringHoleRadius,
 		notch_angle=			correction1,
 		negative_space=			negativeSpace,
 		space=				negativeMargin);
