@@ -7,3 +7,5 @@ I am very grateful for the support and assistance from the Maker community over 
 In particular, Thingiverse users rustedrobot, emmet, ssd, barrychuck and MakerBlock have been invaluable, providing detailed feedback and insight on the various prototypes they printed out.
 
 UPDATE: TheRuttmeister's print of TestJig #2 has passed all four tests. Looks like we have a working, printable escapement design. Major milestone passed!
+
+UPDATE: rustedrobot's print of TestJig #2 has also passed the tests, after some manual post-processing, and we have video: http://www.prototribe.net/vidplay/testjig2.html
