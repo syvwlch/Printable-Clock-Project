@@ -41,6 +41,11 @@ Club tooth parameters accessible in tooth(), ringtooth(), escapementWheel() and 
 Modified escapement to control angle of impulse faces on the pallets, defaults to 45o as per ideal Graham escapement w/o club teeth
 Escapement will work if impulse face angles are set to 45o minus tooth lean plus club angle, and drop can be controlled via face angle
 
+v10 -2011 05 08
+Modified the drum() module to add holes to attach a string
+Backwards compatible with no holes if the new arguments are not passed
+Modified pinionDrum() to make use of this new feature, but backwards compatible with no holes if the new arguments are not passed
+
 
 It includes the following modules:
  
@@ -209,11 +214,14 @@ module ringTooth(
 module drum(
 	radius,
 	rimWidth,
-	drumHeight)
+	drumHeight,
+	numberHoles=0,
+	holeRadius=0,
+	holeRotate=0)
 {
 	flangeWidth=min(drumHeight/3,rimWidth/2);
 
-	difference()		// makes the center hollow
+	difference()		// makes the center hollow & includes holes to attach string
 	 {
 		union() 	// builds the drum with flanges
 		{
@@ -228,6 +236,15 @@ module drum(
 
 		translate([0,0,-1])
 		cylinder(drumHeight+2,radius-rimWidth,radius-rimWidth,$fn=30);
+
+	for ( j=[0:numberHoles-1]) // adds the holes
+	{
+		translate([0,0,drumHeight/2])
+		rotate(holeRotate+360/numberHoles*j,[0,0,1]) 
+		rotate(90,[0,1,0])
+		cylinder(r=holeRadius,h=radius+1);
+	}
+
 	}
 }
 
@@ -742,7 +759,6 @@ module pinionEscapementWheel (
 
 module pinionDrum (
 	drum_height,
-	number_spokes,
 	large_gear_teeth,
 	large_gear_circular_pitch,
 	gear_clearance=0.2,
@@ -758,7 +774,10 @@ module pinionDrum (
 	gear_thickness,
 	sleeve_extension,
 	spacer,
+	number_spokes,
 	spoke_width,
+	number_holes=0,
+	hole_radius=0,
 	notch_angle=0,
 	negative_space=false,
 	space=0.1) 
@@ -815,7 +834,13 @@ module pinionDrum (
 
 			color(structure_color)
 			translate([0,0,gear_thickness-gear_spacer])
-			drum(	large_dedendum_radius,rim_width,drum_height+gear_spacer);
+			drum(
+				radius=large_dedendum_radius,
+				rimWidth=rim_width,
+				drumHeight=drum_height+gear_spacer,
+				numberHoles=number_holes,
+				holeRadius=min(hole_radius,(drum_height+gear_spacer)/6),
+				holeRotate=notch_angle+180/number_holes);
 
 			color(structure_color)
 			spokes(number_spokes,large_dedendum_radius-rim_width,drum_height+gear_thickness,spoke_width,bore_radius,notch_angle);
