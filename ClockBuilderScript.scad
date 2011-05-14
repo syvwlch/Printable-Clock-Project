@@ -34,7 +34,7 @@ clubAngle=22.5; 				// impulse face angle
 
 // Escapement Parameters
 toothSpan=3.5; 				// how many teeth the escapement spans
-faceAngle=8; 				// how many degrees the impulse face covers seen from the hub of the escapement wheel
+faceAngle=5; 				// how many degrees the impulse face covers seen from the hub of the escapement wheel
 armAngle=24; 				// angle of the escapement's arms
 maxSwing=8;				// maximum swing of the escapement, in degrees
 armWidth=4*scale; 			// width of the escapement's arms
