@@ -20,8 +20,8 @@ CC-A-SA licensed.*/
 	boltHeadRadius=3*scale;	// radius for the counter-sunk holes in the frame for bolt heads
 
 // Command Parameters
-	showAssembly=	false;		// true to show the whole clock, assembled
-	showToPrint=	true;		// true to show only one part, laid out for printing
+	showAssembly=	true;		// true to show the whole clock, assembled
+	showToPrint=	false;		// true to show only one part, laid out for printing
 
 	showLimits=		false;		// in laid out to print mode, show the print volume limits
 	partToPrint=	12;		// in laid out to print mode, which part to show
@@ -42,7 +42,7 @@ CC-A-SA licensed.*/
 						// 0 means no herringbone gears at all
 
 	// primary rotation of the slowest wheel, usually the hours' hand 
-		rotation_angle=0;// -(3600*1+60*50+30)/120;
+	rotation_angle=-(3600*1+60*50+30)/120;
 
 	gearExists1=	1;		// 1:drum
 	gearExists2=	3;		// 2:pinion gear, 3: escapement wheel
@@ -231,6 +231,14 @@ module backFrame()
 		{
 			ring(sleeve_radius,boltHeadRadius,thickness,30,6);
 
+			translate([0,0,thickness/2])
+			difference()
+			{
+				cylinder(thickness/2,sleeve_radius,sleeve_radius,$fn=30); 
+				translate([0,0,0])
+				cylinder(thickness/2,boltHeadRadius,bore_radius,$fn=30);
+			}
+
 			translate([0,0,thickness])
 			ring(sleeve_radius,bore_radius,addFrameThickness);
 	
@@ -244,6 +252,15 @@ module backFrame()
 			rotate(-60,[0,0,1])
 			translate([axis_separation,0,0])
 			ring(sleeve_radius,boltHeadRadius,thickness,30,6);
+
+			rotate(-60,[0,0,1])
+			translate([axis_separation,0,thickness/2])
+			difference()
+			{
+				cylinder(thickness/2,sleeve_radius,sleeve_radius,$fn=30); 
+				translate([0,0,0])
+				cylinder(thickness/2,boltHeadRadius,bore_radius,$fn=30);
+			}
 
 			rotate(-60,[0,0,1])
 			translate([axis_separation,0,thickness])
@@ -258,6 +275,14 @@ module backFrame()
 		{
 			ring(sleeve_radius,boltHeadRadius,thickness,30,6);
 
+			translate([0,0,thickness/2])
+			difference()
+			{
+				cylinder(thickness/2,sleeve_radius,sleeve_radius,$fn=30); 
+				translate([0,0,0])
+				cylinder(thickness/2,boltHeadRadius,bore_radius,$fn=30);
+			}
+
 			translate([0,0,thickness])
 			ring(sleeve_radius,bore_radius,addFrameThickness);
 	
@@ -271,6 +296,15 @@ module backFrame()
 			rotate(-60,[0,0,1])
 			translate([axis_separation,0,0])
 			ring(sleeve_radius,boltHeadRadius,thickness,30,6);
+
+			rotate(-60,[0,0,1])
+			translate([axis_separation,0,thickness/2])
+			difference()
+			{
+				cylinder(thickness/2,sleeve_radius,sleeve_radius,$fn=30); 
+				translate([0,0,0])
+				cylinder(thickness/2,boltHeadRadius,bore_radius,$fn=30);
+			}
 
 			rotate(-60,[0,0,1])
 			translate([axis_separation,0,thickness])
