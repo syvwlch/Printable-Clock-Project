@@ -45,6 +45,9 @@ hubHeight=thickness; 			// thickness of the escapement's hub
 // Pendulum Parameters
 pendulumLength=printLimit/2-hubWidth;		// length of the pendulum, measured from pin to center of bob
 pendulumRadius=hubWidth;				// radius of the bob at the end of the pendulum
+snapFitBase=pendulumRadius/2;			// dimensions of the snap-fit end on the pendulum arm
+snapFitTop=2*snapFitBase;				// dimensions of the snap-fit end on the pendulum arm
+snapFitHeight=snapFitBase;				// dimensions of the snap-fit end on the pendulum arm
 
 
 // Gear Parameters
@@ -178,6 +181,23 @@ module placeWheel(angle,distance,depth)
 			}
 		}
 	}
+}
+
+module trapezoidkey(base, top, height, thickness,plug=0) 
+{
+	linear_extrude(height=thickness, center=true, convexity=10, twist=0) 
+	polygon(
+		points= [
+			[-base/2,0], 
+			[-base/2,-plug], 
+			[base/2,-plug],
+			[base/2,0],
+			[top/2, height],
+			[-top/2, height] 
+			],
+		paths= [[0,1,2,3,4,5]],
+		convexity=10
+		);
 }
 
 module pinion1(negativeSpace=false)
@@ -772,9 +792,39 @@ module escapementPendulum(sleeve_level,sleeve_extension,negativeSpace=false)
 		rotate(90-pendulumKink,[0,0,1])
 		{
 			translate([pinRadius+clearance,-armWidth,0])
-			cube([pendulumLength-2*(pinRadius+clearance),2*armWidth,hubHeight]);
-			translate([pendulumLength,0,0])
-			ring(pendulumRadius,(pinRadius+clearance),hubHeight);
+			cube([pendulumLength-(pinRadius+clearance)-(snapFitHeight+tightFit),2*armWidth,hubHeight]);
+
+			translate([pendulumLength,0,hubHeight/2])
+			difference()
+			{
+				translate([-pendulumRadius,-pendulumRadius,-hubHeight/2])
+				cube([pendulumRadius,pendulumRadius*2,hubHeight]);
+
+				rotate(90,[0,0,1])
+				translate ([0,0,-1])
+				trapezoidkey(snapFitBase, snapFitTop, snapFitHeight, hubHeight+8,1);
+			}
+
+			translate([pendulumLength,0,hubHeight/2])
+			difference()
+			{
+				union()
+				{
+					translate([tightFit,-pendulumRadius,-hubHeight/2])
+					cube([pendulumLength-2*(snapFitHeight+tightFit),2*pendulumRadius,hubHeight]);
+	
+					rotate(90,[0,0,1])
+					trapezoidkey(snapFitBase-tightFit, snapFitTop-tightFit, snapFitHeight-tightFit, hubHeight, tightFit);
+				}
+
+				rotate(90,[0,0,1])
+				translate ([0,-(pendulumLength-2*(snapFitHeight+tightFit)),-1])
+				trapezoidkey(snapFitBase, snapFitTop, snapFitHeight, hubHeight+8,1);
+
+				translate ([(pendulumLength-2*(snapFitHeight+tightFit))/2,0,-hubHeight])
+				ring(pinRadius+clearance,0,2*hubHeight);
+			}
+
 		}
 
 		if(negativeSpace==false) {ring(sleeve_radius,bore_radius,thickness+sleeve_extension);}
