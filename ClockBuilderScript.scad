@@ -180,54 +180,6 @@ module placeWheel(angle,distance,depth)
 	}
 }
 
-module secondHand(negativeSpace=false)
-{
-	color([1,0,0])
-	hand(
-		hand_length=		secondLength,
-		hand_width=		secondWidth,
-		hand_thickness=		handThickness,
-		sleeve_level=		sleeveLevel9,
-		pin_radius=			pinRadius,
-		sleeve_thickness=		sleeveThickness,
-		loose_fit=			clearance,
-		tight_fit=			tightFit,
-		negative_space=		negativeSpace,
-		space=			negativeMargin);
-}
-
-module minuteHand(negativeSpace=false)
-{
-	color([0,1,0])
-	hand(
-		hand_length=		minuteLength,
-		hand_width=		minuteWidth,
-		hand_thickness=		handThickness,
-		sleeve_level=		sleeveLevel5,
-		pin_radius=			pinRadius,
-		sleeve_thickness=		sleeveThickness,
-		loose_fit=			clearance,
-		tight_fit=			tightFit,
-		negative_space=		negativeSpace,
-		space=			negativeMargin);
-}
-
-module hourHand(negativeSpace=false)
-{
-	color([0,0,1])
-	hand(
-		hand_length=		hourLength,
-		hand_width=		hourWidth,
-		hand_thickness=		handThickness,
-		sleeve_level=		sleeveLevel1,
-		pin_radius=			pinRadius,
-		sleeve_thickness=		sleeveThickness,
-		loose_fit=			clearance,
-		tight_fit=			tightFit,
-		negative_space=		negativeSpace,
-		space=			negativeMargin);
-}
-
 module pinion1(negativeSpace=false)
 {
 	if (gearExists1==1)
