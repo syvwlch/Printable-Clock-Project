@@ -627,7 +627,7 @@ module pinionWheel(
 		{
 			ring(large_addendum_radius+space,0,gear_thickness+2*space);
 
-			ring(small_addendum_radius+space,0,2*gear_thickness+2*space);
+			ring(small_addendum_radius+space,0,2*gear_thickness+spacer+2*space);
 
 			ring(sleeve_radius+space,0,2*gear_thickness+spacer+sleeve_extension+2*space);
 		}
@@ -749,7 +749,7 @@ module pinionEscapementWheel (
 		{
 			ring(radius+space,0,gear_thickness+2*space);
 
-			ring(small_addendum_radius+space,0,2*gear_thickness+2*space);
+			ring(small_addendum_radius+space,0,2*gear_thickness+spacer+2*space);
 
 			ring(sleeve_radius+space,0,2*gear_thickness+spacer+sleeve_extension+2*space);
 		}
@@ -858,7 +858,7 @@ module pinionDrum (
 		{
 			ring(large_addendum_radius+space,0,gear_thickness+2*space);
 
-			ring(large_dedendum_radius+space,0,drum_height+2*space);
+			ring(large_dedendum_radius+space,0,thickness+drum_height+2*space);
 
 			ring(sleeve_radius+space,0,drum_height+sleeve_extension+2*space);
 		}
