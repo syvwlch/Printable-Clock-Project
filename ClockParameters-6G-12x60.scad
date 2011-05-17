@@ -210,6 +210,7 @@ module frontFrame()
 				translate([bore_radius1,-sleeve_radius/2,0])
 				cube([axis_separation-bore_radius1,sleeve_radius,thickness]);
 			}
+		
 			rotate(180,[0,0,1])
 			{
 				ring(sleeve_radius,bore_radius,addFrameThickness+drumHeight);
