@@ -146,11 +146,11 @@ CC-A-SA licensed.*/
 		sleeveExtension3=	drumThickness+addFrameThickness+2*addHandThickness+0*deltaZ+1;
 		sleeveExtension4=	0;
 		sleeveExtension5=	drumThickness+addFrameThickness+3*addHandThickness+2*deltaZ+1;
-		sleeveExtension6=	0;
+		sleeveExtension6=	spacer-0.5;
 		sleeveExtension7=	0;
 		sleeveExtension8=	0;
 		sleeveExtension9=	0;
-		sleeveExtension10=	0;
+		sleeveExtension10=	sleeveExtension6;
 
 	// overall length of the shaft indicators (these don't get printed)
 		shaftLength=		drumThickness+addFrameThickness+3*addHandThickness+5*deltaZ;
@@ -175,7 +175,7 @@ module frontFrame()
 {
 	bore_radius=pinRadius+clearance;
 	sleeve_radius=pinRadius+sleeveThickness*2;
-	bore_radius1=bore_radius+(sleeveLevel1+1)*sleeveThickness;
+	bore_radius1=(sleeveLevel1==0 ? bore_radius : bore_radius+(sleeveLevel1+1)*sleeveThickness);
 	sleeve_radius1=sleeve_radius+(sleeveLevel1+1)*sleeveThickness;
 	
 	rotate((showToPrint==true ? 45 : 0),[0,0,1])
@@ -204,7 +204,7 @@ module frontFrame()
 				translate([axis_separation,0,0])
 				rotate(60,[0,0,1])
 				translate([0,-sleeve_radius,0])
-				ring(sleeve_radius,bore_radius,addFrameThickness+3*deltaZ+thickness+0.5);
+				ring(sleeve_radius,bore_radius,addFrameThickness+drumHeight+thickness+0*deltaZ+0.5);
 
 				rotate(60,[0,0,1])
 				translate([bore_radius1,-sleeve_radius/2,0])
@@ -226,7 +226,7 @@ module frontFrame()
 				translate([axis_separation,0,0])
 				rotate(60,[0,0,1])
 				translate([0,-sleeve_radius,0])
-				ring(sleeve_radius,bore_radius,addFrameThickness+2*deltaZ+thickness+0.5);
+				ring(sleeve_radius,bore_radius,addFrameThickness+drumHeight+thickness+0*deltaZ+0.5);
 
 				rotate(60,[0,0,1])
 				translate([sleeveLevel1*sleeveThickness,-sleeve_radius/2,0])
@@ -246,7 +246,7 @@ module backFrame()
 	translate(
 		[(showToPrint==true ? axis_separation/2 : 0),
 		0,
-		(showAssembly==true ? -thickness-addFrameThickness-1.5-5*deltaZ-7*explodeZ : 0)])
+		(showAssembly==true ? -addFrameThickness-0.5-4*deltaZ-5*explodeZ : 0)])
 	union()
 	placeWheel(fold_angle,axis_separation,0)
 	{
@@ -272,7 +272,7 @@ module backFrame()
 			translate([0,-sleeve_radius,0])
 			difference()
 			{
-				ring(sleeve_radius,bore_radius,addFrameThickness+4*deltaZ-1.5);
+				ring(sleeve_radius,bore_radius,addFrameThickness+4*deltaZ+0.5);
 
 				boltHole(boltHeadRadius,boltHeadThickness);
 			}
@@ -326,7 +326,7 @@ module backFrame()
 			translate([0,-sleeve_radius,0])
 			difference()
 			{
-				ring(sleeve_radius,bore_radius,addFrameThickness+4*deltaZ-1.5);
+				ring(sleeve_radius,bore_radius,addFrameThickness+4*deltaZ+0.5);
 
 				boltHole(boltHeadRadius,boltHeadThickness);
 			}
