@@ -1162,16 +1162,129 @@ module laidOutToPrint(index,show_limits=false,negativeSpace=false)
 		assembled(true,false,true);
 	}
 
+
+	handPrintSpacing=printLimit/5;
+	handPrintOffset=-printLimit/10;
+
 	if (index == 0)
 	{
 		echo("Printing hands!");
-		translate([0,printLimit/3,0])
-		hourHand(negativeSpace);
 
-		translate([0,-printLimit/3,0])
-		minuteHand(negativeSpace);
+		if (handWidth1!=0)
+		translate([-printLimit/3,handPrintOffset+2*handPrintSpacing,0])
+		hand(
+			hand_length=		handLength1,
+			hand_width=		handWidth1,
+			hand_thickness=		handThickness,
+			sleeve_level=		sleeveLevel1,
+			pin_radius=			pinRadius,
+			sleeve_thickness=		sleeveThickness,
+			loose_fit=			clearance,
+			tight_fit=			tightFit,
+			negative_space=		negativeSpace,
+			space=			negativeMargin);
 
-		secondHand(negativeSpace);
+		if (handWidth2!=0)
+		translate([printLimit/3,handPrintOffset+1.5*handPrintSpacing,0])
+		rotate(180,[0,0,1])
+		hand(
+			hand_length=		handLength2,
+			hand_width=		handWidth2,
+			hand_thickness=		handThickness,
+			sleeve_level=		sleeveLevel2,
+			pin_radius=			pinRadius,
+			sleeve_thickness=		sleeveThickness,
+			loose_fit=			clearance,
+			tight_fit=			tightFit,
+			negative_space=		negativeSpace,
+			space=			negativeMargin);
+
+		if (handWidth3!=0)
+		translate([-printLimit/3,handPrintOffset+1*handPrintSpacing,0])
+		hand(
+			hand_length=		handLength3,
+			hand_width=		handWidth3,
+			hand_thickness=		handThickness,
+			sleeve_level=		sleeveLevel3,
+			pin_radius=			pinRadius,
+			sleeve_thickness=		sleeveThickness,
+			loose_fit=			clearance,
+			tight_fit=			tightFit,
+			negative_space=		negativeSpace,
+			space=			negativeMargin);
+
+		if (handWidth4!=0)
+		translate([printLimit/3,handPrintOffset+0.5*handPrintSpacing,0])
+		rotate(180,[0,0,1])
+		hand(
+			hand_length=		handLength4,
+			hand_width=		handWidth4,
+			hand_thickness=		handThickness,
+			sleeve_level=		sleeveLevel4,
+			pin_radius=			pinRadius,
+			sleeve_thickness=		sleeveThickness,
+			loose_fit=			clearance,
+			tight_fit=			tightFit,
+			negative_space=		negativeSpace,
+			space=			negativeMargin);
+
+		if (handWidth5!=0)
+		translate([-printLimit/3,handPrintOffset+0*handPrintSpacing,0])
+		hand(
+			hand_length=		handLength5,
+			hand_width=		handWidth5,
+			hand_thickness=		handThickness,
+			sleeve_level=		sleeveLevel5,
+			pin_radius=			pinRadius,
+			sleeve_thickness=		sleeveThickness,
+			loose_fit=			clearance,
+			tight_fit=			tightFit,
+			negative_space=		negativeSpace,
+			space=			negativeMargin);
+
+		if (handWidth6!=0)
+		translate([printLimit/3,handPrintOffset-0.5*handPrintSpacing,0])
+		rotate(180,[0,0,1])
+		hand(
+			hand_length=		handLength6,
+			hand_width=		handWidth6,
+			hand_thickness=		handThickness,
+			sleeve_level=		sleeveLevel6,
+			pin_radius=			pinRadius,
+			sleeve_thickness=		sleeveThickness,
+			loose_fit=			clearance,
+			tight_fit=			tightFit,
+			negative_space=		negativeSpace,
+			space=			negativeMargin);
+
+		if (handWidth7!=0)
+		translate([-printLimit/3,handPrintOffset-1.0*handPrintSpacing,0])
+		hand(
+			hand_length=		handLength7,
+			hand_width=		handWidth7,
+			hand_thickness=		handThickness,
+			sleeve_level=		sleeveLevel7,
+			pin_radius=			pinRadius,
+			sleeve_thickness=		sleeveThickness,
+			loose_fit=			clearance,
+			tight_fit=			tightFit,
+			negative_space=		negativeSpace,
+			space=			negativeMargin);
+
+		if (handWidth8!=0)
+		translate([printLimit/3,handPrintOffset-1.5*handPrintSpacing,0])
+		rotate(180,[0,0,1])
+		hand(
+			hand_length=		handLength8,
+			hand_width=		handWidth8,
+			hand_thickness=		handThickness,
+			sleeve_level=		sleeveLevel8,
+			pin_radius=			pinRadius,
+			sleeve_thickness=		sleeveThickness,
+			loose_fit=			clearance,
+			tight_fit=			tightFit,
+			negative_space=		negativeSpace,
+			space=			negativeMargin);
 	}
 
 	if (index == 1)
