@@ -31,7 +31,7 @@ CC-A-SA licensed.*/
 	showFrame=	true;		// whether to show the frame in assembled clock
 	explodeZ=		0*scale;	// exploded view parameter for assembled clock
 
-	showNegativeSpace=false;	// whether to show the negative space version of the parts
+	showNegativeSpace=true;	// whether to show the negative space version of the parts
 	negativeMargin=	0*scale;	// margin around the negative space version of the parts
 
 // Clock parameters
@@ -162,12 +162,12 @@ include <ClockBuilderScript.scad>
 
 // custom dev goes after this comment
 
-module boltHole(boltHeadRadius,boltHeadThickness) 
+module boltHole(boltHeadRadius,boltHeadThickness,headSegments=6) 
 {
 	translate([0,0,-1])
-	ring(boltHeadRadius,0,boltHeadThickness+1,6,30);
+	ring(boltHeadRadius,0,boltHeadThickness+1,headSegments,30);
 	translate([0,0,boltHeadThickness])
-	cylinder(boltHeadRadius,boltHeadRadius,0,$fn=6);
+	cylinder(boltHeadRadius,boltHeadRadius,0,$fn=headSegments);
 }
 
 module frontFrame()
@@ -267,12 +267,26 @@ module backFrame()
 			cube([axis_separation-2*boltHeadRadius,sleeve_radius,thickness]);
 			
 			rotate(-60,[0,0,1])
-			translate([axis_separation-3*boltHeadRadius,-(sleeve_radius/2+bore_radius),0]) 
-			ring(sleeve_radius,bore_radius,thickness);
+			translate([axis_separation-3*boltHeadRadius,-(sleeve_radius/2+boltHeadThickness),0]) 
+			difference() 
+			{
+				ring(sleeve_radius,bore_radius,thickness);
+				
+				mirror([0,0,1])
+				translate([0,0,-thickness])
+				boltHole(boltHeadRadius,boltHeadThickness,30);
+			}
 
 			rotate(60,[0,0,1])
-			translate([axis_separation-3*boltHeadRadius,(sleeve_radius/2+bore_radius),0]) 
-			ring(sleeve_radius,bore_radius,thickness);
+			translate([axis_separation-3*boltHeadRadius,(sleeve_radius/2+boltHeadThickness),0])
+			difference() 
+			{
+				ring(sleeve_radius,bore_radius,thickness);
+				
+				mirror([0,0,1])
+				translate([0,0,-thickness])
+				boltHole(boltHeadRadius,boltHeadThickness,30);
+			}
 		}
 	
 		rotate(180,[0,0,1]) 
@@ -305,12 +319,26 @@ module backFrame()
 			cube([axis_separation-2*boltHeadRadius,sleeve_radius,thickness]);
 
 			rotate(-60,[0,0,1])
-			translate([axis_separation-3*boltHeadRadius,-(sleeve_radius/2+bore_radius),0]) 
-			ring(sleeve_radius,bore_radius,thickness);
+			translate([axis_separation-3*boltHeadRadius,-(sleeve_radius/2+boltHeadThickness),0]) 
+			difference() 
+			{
+				ring(sleeve_radius,bore_radius,thickness);
+				
+				mirror([0,0,1])
+				translate([0,0,-thickness])
+				boltHole(boltHeadRadius,boltHeadThickness,30);
+			}
 
 			rotate(60,[0,0,1])
-			translate([axis_separation-3*boltHeadRadius,(sleeve_radius/2+bore_radius),0]) 
-			ring(sleeve_radius,bore_radius,thickness);
+			translate([axis_separation-3*boltHeadRadius,(sleeve_radius/2+boltHeadThickness),0]) 
+			difference() 
+			{
+				ring(sleeve_radius,bore_radius,thickness);
+				
+				mirror([0,0,1])
+				translate([0,0,-thickness])
+				boltHole(boltHeadRadius,boltHeadThickness,30);
+			}
 		}
 	}
 }
