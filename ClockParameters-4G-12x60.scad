@@ -175,9 +175,14 @@ module frontFrame()
 {
 	bore_radius=pinRadius+clearance;
 	sleeve_radius=pinRadius+sleeveThickness*2;
+	bore_radius1=bore_radius+(sleeveLevel1+1)*sleeveThickness;
+	sleeve_radius1=sleeve_radius+(sleeveLevel1+1)*sleeveThickness;
 	
 	rotate((showToPrint==true ? 45 : 0),[0,0,1])
-	translate([(showToPrint==true ? axis_separation/2 : 0),0,(showAssembly==true ? 1*thickness+drumHeight+spacer+0.5 : 0)])
+	translate(
+		[(showToPrint==true ? axis_separation/2 : 0),
+		0,
+		(showAssembly==true ? 1*thickness+drumHeight+spacer+0.5+explodeZ : 0)])
 	{
 		rotate((showAssembly==true ? 180 : 0),[1,0,0])
 		translate([0,0,(showAssembly==true ? -thickness : 0)])
@@ -186,31 +191,32 @@ module frontFrame()
 		{
 			rotate(180,[0,0,1])
 			{
-				ring(sleeve_radius+sleeveLevel1*sleeveThickness,bore_radius+sleeveLevel1*sleeveThickness,addFrameThickness);
+				ring(sleeve_radius1,bore_radius1,addFrameThickness);
 
-				translate([bore_radius+sleeveLevel1*sleeveThickness,-sleeve_radius/2,0])
-				cube([axis_separation-(2*bore_radius+sleeveLevel1*sleeveThickness),sleeve_radius,thickness]);
+				translate([bore_radius1,-sleeve_radius/2,0])
+				cube([axis_separation-(bore_radius+bore_radius1),sleeve_radius,thickness]);
 
 				rotate(-60,[0,0,1])
-				translate([bore_radius+sleeveLevel1*sleeveThickness,-sleeve_radius/2,0])
-				cube([axis_separation-(bore_radius+sleeveLevel1*sleeveThickness),sleeve_radius,thickness]);
+				translate([bore_radius1,-sleeve_radius/2,0])
+				cube([axis_separation-bore_radius1,sleeve_radius,thickness]);
 
 				rotate(-60,[0,0,1])
 				translate([axis_separation,0,0])
 				rotate(60,[0,0,1])
 				translate([0,-sleeve_radius,0])
-				ring(sleeve_radius,bore_radius,addFrameThickness+2*deltaZ+thickness+0.5);
+				ring(sleeve_radius,bore_radius,addFrameThickness+3*deltaZ+thickness+0.5);
 
 				rotate(60,[0,0,1])
-				translate([bore_radius+sleeveLevel1*sleeveThickness,-sleeve_radius/2,0])
-				cube([axis_separation-(bore_radius+sleeveLevel1*sleeveThickness),sleeve_radius,thickness]);
+				translate([bore_radius1,-sleeve_radius/2,0])
+				cube([axis_separation-bore_radius1,sleeve_radius,thickness]);
 			}
+		
 			rotate(180,[0,0,1])
 			{
 				ring(sleeve_radius,bore_radius,addFrameThickness+drumHeight);
 
 				translate([bore_radius,-sleeve_radius/2,0])
-				cube([axis_separation-(2*bore_radius+sleeveLevel1*sleeveThickness),sleeve_radius,thickness]);
+				cube([axis_separation-(bore_radius+bore_radius1),sleeve_radius,thickness]);
 
 				rotate(-60,[0,0,1])
 				translate([bore_radius,-sleeve_radius/2,0])
@@ -237,7 +243,10 @@ module backFrame()
 
 	color([0.5,1,0.5])
 	rotate((showToPrint==true ? 45 : 0),[0,0,1])
-	translate([(showToPrint==true ? axis_separation/2 : 0),0,(showAssembly==true ? -thickness-addFrameThickness-1.5-3*deltaZ : 0)])
+	translate(
+		[(showToPrint==true ? axis_separation/2 : 0),
+		0,
+		(showAssembly==true ? -thickness-addFrameThickness-1.5-5*deltaZ-7*explodeZ : 0)])
 	union()
 	placeWheel(fold_angle,axis_separation,0)
 	{
