@@ -176,7 +176,7 @@ module frontFrame()
 	sleeve_radius=pinRadius+sleeveThickness*2;
 
 	rotate((showToPrint==true ? 45 : 0),[0,0,1])
-	translate([(showToPrint==true ? printLimit/4 : 0),0,(showAssembly==true ? thickness+drumHeight+spacer+0.5 +2*explodeZ: 0)])
+	translate([(showToPrint==true ? axis_separation/2 : 0),0,(showAssembly==true ? thickness+drumHeight+spacer+0.5 +2*explodeZ: 0)])
 	{
 		rotate((showAssembly==true ? 180 : 0),[1,0,0])
 		translate([0,0,(showAssembly==true ? -thickness : 0)])
@@ -237,7 +237,7 @@ module backFrame()
 
 	color([0.5,1,0.5])
 	rotate((showToPrint==true ? 45 : 0),[0,0,1])
-	translate([(showToPrint==true ? printLimit/4 : 0),0,(showAssembly==true ? -addFrameThickness-deltaZ-0.5-explodeZ : 0)])
+	translate([(showToPrint==true ? axis_separation/2 : 0),0,(showAssembly==true ? -addFrameThickness-deltaZ-0.5-explodeZ : 0)])
 	union()
 	placeWheel(fold_angle,axis_separation,0)
 	{
