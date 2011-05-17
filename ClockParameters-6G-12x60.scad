@@ -21,11 +21,11 @@ CC-A-SA licensed.*/
 	boltHeadThickness=3*scale;	// thickness for the counter-sunk holes in the frame for bolt heads
 
 // Command Parameters
-	showAssembly=	false;		// true to show the whole clock, assembled
-	showToPrint=	true;		// true to show only one part, laid out for printing
+	showAssembly=	true;		// true to show the whole clock, assembled
+	showToPrint=	false;		// true to show only one part, laid out for printing
 
-	showLimits=		true;		// in laid out to print mode, show the print volume limits
-	partToPrint=	11;		// in laid out to print mode, which part to show
+	showLimits=		false;		// in laid out to print mode, show the print volume limits
+	partToPrint=	01;		// in laid out to print mode, which part to show
 
 	showShafts=	true;		// whether to show the metal shafts in assembled clock
 	showFrame=	true;		// whether to show the frame in assembled clock
@@ -76,11 +76,11 @@ CC-A-SA licensed.*/
 
 // Hand Parameters 
 	handThickness=	0.5*thickness; 		// thickness of the hands (and extension of the sleeves past the next outer sleeve)
-	secondLength=	0.4*printLimit; 		// length of the seconds hand
+	secondLength=	0.5*printLimit; 		// length of the seconds hand
 	secondWidth=	0.5*handThickness; 	// width of the seconds hand
-	minuteLength=	0.8*secondLength; 	// length of the minutes hand
+	minuteLength=	1*secondLength; 	// length of the minutes hand
 	minuteWidth=	1*secondWidth; 		// width of the minutes hand
-	hourLength=	0.6*secondLength; 	// legnth of the hours hand
+	hourLength=	0.7*secondLength; 	// legnth of the hours hand
 	hourWidth=		2*secondWidth; 		// width of the hours hand
 
 	handWidth1=	hourWidth;		//
@@ -117,7 +117,7 @@ CC-A-SA licensed.*/
 // Preliminary Calcs 
 
 	// distance between consecutive gear shafts 
-		axis_separation= 0.5*printLimit*4/3; // driven by the ratio of the largest, and next-largest, gear ratio
+		axis_separation= 0.5*printLimit*4/3.2; // driven by the ratio of the largest, and next-largest, gear ratio
 	
 	// distance between shaft for escapement and wheel
 		escapement_separation= axis_separation;
