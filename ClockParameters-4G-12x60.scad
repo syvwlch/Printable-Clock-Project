@@ -4,7 +4,7 @@ and many others at Thingiverse.
 
 This script calls upon the ClockBuilder script to build a clock defined by the parameters below.
 
-This is a complete, 8-gear clock with hour, minute and second hands.
+This is a complete, 4-gear clock with hour, minute and second hands.
 
 CC-A-SA licensed.*/
 
@@ -177,7 +177,7 @@ module frontFrame()
 	sleeve_radius=pinRadius+sleeveThickness*2;
 	
 	rotate((showToPrint==true ? 45 : 0),[0,0,1])
-	translate([(showToPrint==true ? printLimit/4 : 0),0,(showAssembly==true ? 1*thickness+drumHeight+spacer+0.5 : 0)])
+	translate([(showToPrint==true ? axis_separation/2 : 0),0,(showAssembly==true ? 1*thickness+drumHeight+spacer+0.5 : 0)])
 	{
 		rotate((showAssembly==true ? 180 : 0),[1,0,0])
 		translate([0,0,(showAssembly==true ? -thickness : 0)])
@@ -237,7 +237,7 @@ module backFrame()
 
 	color([0.5,1,0.5])
 	rotate((showToPrint==true ? 45 : 0),[0,0,1])
-	translate([(showToPrint==true ? printLimit/4 : 0),0,(showAssembly==true ? -thickness-addFrameThickness-1.5-3*deltaZ : 0)])
+	translate([(showToPrint==true ? axis_separation/2 : 0),0,(showAssembly==true ? -thickness-addFrameThickness-1.5-3*deltaZ : 0)])
 	union()
 	placeWheel(fold_angle,axis_separation,0)
 	{
