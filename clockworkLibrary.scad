@@ -41,11 +41,14 @@ Club tooth parameters accessible in tooth(), ringtooth(), escapementWheel() and 
 Modified escapement to control angle of impulse faces on the pallets, defaults to 45o as per ideal Graham escapement w/o club teeth
 Escapement will work if impulse face angles are set to 45o minus tooth lean plus club angle, and drop can be controlled via face angle
 
-v10 -2011 05 08
+v10 - 2011 05 08
 Modified the drum() module to add holes to attach a string
 Backwards compatible with no holes if the new arguments are not passed
 Modified pinionDrum() to make use of this new feature, but backwards compatible with no holes if the new arguments are not passed
 
+v11 - 2011 05 18
+Modified to support the ratcheting drum designed by rustedrobot: http://www.thingiverse.com/thing:8555
+Backwards compatible, one-piece drum still available as an option
 
 It includes the following modules:
  
@@ -1076,7 +1079,7 @@ module ratchetDrum(
 				ratchetArm(
 					height=gear_thickness, 
 					width=0.1*large_dedendum_radius,
-					 length=0.72*large_dedendum_radius,
+					 length=0.71*large_dedendum_radius,
 					headLength=large_dedendum_radius/3,
 					angle=90,
 					distance=0.5*large_dedendum_radius);
