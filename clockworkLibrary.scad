@@ -586,7 +586,7 @@ module pinionWheel(
 			spokes(small_gear_teeth,large_dedendum_radius-rim_width,gear_thickness-gear_spacer,spoke_width,bore_radius,0);
 
 			color(structure_color)
-			ring(small_addendum_radius-rim_width,bore_radius,gear_thickness+spacer-gear_spacer);
+			ring(small_addendum_radius,bore_radius,gear_thickness-gear_spacer);
 			
 			color(small_gear_color)
 			translate([0,0,gear_thickness*1.5+spacer])
