@@ -15,7 +15,7 @@ CC-A-SA licensed.*/
 	thickness=6*scale; 		// thickness along the Z axis 
 	spacer=1*scale;		 	// space between gears in a wheel along z axis
 
-	drumHeight=2*thickness; 	// height of the drum (along z), only for drum pinion
+	drumHeight=3*thickness; 	// height of the drum (along z), only for drum pinion
 
 	boltHeadRadius=3*scale; 	// radius for the counter-sunk holes in the frame for bolt heads
 	boltHeadThickness=3*scale;	// thickness for the counter-sunk holes in the frame for bolt heads
@@ -24,8 +24,8 @@ CC-A-SA licensed.*/
 	showAssembly=	false;		// true to show the whole clock, assembled
 	showToPrint=	true;		// true to show only one part, laid out for printing
 
-	showLimits=		true;		// in laid out to print mode, show the print volume limits
-	partToPrint=	01;		// in laid out to print mode, which part to show
+	showLimits=		false;		// in laid out to print mode, show the print volume limits
+	partToPrint=	2;		// in laid out to print mode, which part to show
 
 	showShafts=	true;		// whether to show the metal shafts in assembled clock
 	showFrame=	true;		// whether to show the frame in assembled clock
