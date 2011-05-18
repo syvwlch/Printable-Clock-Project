@@ -268,7 +268,8 @@ module escapementWheel(
 
 	union() // unites the wheel, the spokes and the hub
 		{
-		ringTooth(radius-toothLength+rimWidth,radius-toothLength,toothThickness,numberTeeth,toothLength) tooth(toothLength,toothThickness,toothLean,toothSharpness,clubSize,clubAngle);
+		ringTooth(radius-toothLength+rimWidth,radius-toothLength,toothThickness,numberTeeth,toothLength)
+		tooth(toothLength,toothThickness,toothLean,toothSharpness,clubSize,clubAngle);
 
 		spokes(numberSpokes,radius-toothLength,drumHeight+toothThickness,spokeWidth,bore,0);
 
@@ -859,6 +860,165 @@ module pinionDrum (
 			ring(large_addendum_radius+space,0,gear_thickness+2*space);
 
 			ring(large_dedendum_radius+space,0,thickness+drum_height+2*space);
+
+			ring(sleeve_radius+space,0,drum_height+sleeve_extension+2*space);
+		}
+	}
+}
+
+module ratchetArm(
+	height=4, 
+	width=4,
+	length=23,
+	headLength=12,
+	angle=45,
+	distance=21) 
+{ 
+	circleRadius=10;
+
+	translate([distance,0,0])
+	rotate([0,0,angle])
+	difference() 
+	{
+		union()
+		{
+		cube([headLength,width,height]);
+
+		cube([length,width/2,height]);
+		}
+
+		translate([headLength,circleRadius+width/2,height/2])
+		cylinder(r=circleRadius, h=height+1, center=true);
+	}
+}
+
+module ratchetGear(
+	drum_height,
+	large_gear_teeth,
+	large_gear_circular_pitch,
+	gear_clearance=0.2,
+	gear_backlash=0.1,
+	gear_spacer=0.5,
+	pressure_angle=14.5,
+	twist_factor=0,
+	rim_width,
+	sleeve_level=0,
+	pin_radius,
+	sleeve_thickness,
+	loose_fit=0.5,
+	gear_thickness,
+	sleeve_extension,
+	spacer,
+	number_spokes,
+	spoke_width,
+	number_holes=0,
+	hole_radius=0,
+	notch_angle=0,
+	negative_space=false,
+	space=0.1)
+{
+	large_dedendum_radius=large_gear_circular_pitch*(large_gear_teeth-2)/360-gear_clearance;
+	//small_dedendum_radius=small_gear_circular_pitch*(small_gear_teeth-2)/360-gear_clearance;
+	
+	large_addendum_radius=large_gear_circular_pitch*(large_gear_teeth+2)/360-gear_clearance;
+	//small_addendum_radius=small_gear_circular_pitch*(small_gear_teeth+2)/360-gear_clearance;
+	
+	bore_radius=pin_radius+sleeve_level*sleeve_thickness+loose_fit;
+	sleeve_radius=pin_radius+(sleeve_level+1)*sleeve_thickness;
+
+	small_gear_color = [0.88, 0.78, 0.5];
+	structure_color = [0.45, 0.43, 0.5];
+	large_gear_color = [0.2, 0.2, 0.2];
+
+	if (negative_space==false)
+	{
+		union()
+		{
+			color(large_gear_color)
+			translate([0,0,gear_thickness/2])
+			gear (circular_pitch=large_gear_circular_pitch, 
+				gear_thickness = 0, 
+				rim_thickness = gear_thickness/2-gear_spacer,
+				rim_width = rim_width,
+				hub_thickness = gear_thickness/2-gear_spacer, 
+				hub_diameter=large_dedendum_radius*2,
+				bore_diameter=(large_dedendum_radius-rim_width)*2, 
+				circles=0,
+				pressure_angle=pressure_angle,
+				number_of_teeth=large_gear_teeth,
+				clearance=gear_clearance,
+				backlash=gear_backlash,
+				twist=twist_factor*180/large_gear_teeth);
+
+			color(large_gear_color)
+			translate([0,0,gear_thickness/2])
+			mirror([0,0,1])
+			gear (circular_pitch=large_gear_circular_pitch, 
+				gear_thickness = 0, 
+				rim_thickness = gear_thickness/2,
+				rim_width = rim_width,
+				hub_thickness = gear_thickness/2, 
+				hub_diameter=large_dedendum_radius*2,
+				bore_diameter=(large_dedendum_radius-rim_width)*2, 
+				circles=0,
+				pressure_angle=pressure_angle,
+				number_of_teeth=large_gear_teeth,
+				clearance=gear_clearance,
+				backlash=gear_backlash,
+				twist=twist_factor*180/large_gear_teeth);
+
+			color(structure_color)
+			spokes(number_spokes,large_dedendum_radius-rim_width,gear_thickness,spoke_width,bore_radius,notch_angle);
+
+			color(structure_color)
+			ring(large_dedendum_radius,large_dedendum_radius-rim_width,gear_thickness);
+
+			color(structure_color)
+			ring(0.6*large_dedendum_radius,bore_radius,gear_thickness);
+
+			color(small_gear_color)
+			rotate(ratchetAdjust,[0,0,1])
+			ringTooth(
+				outerRadius=0.5*large_dedendum_radius,
+				innerRadius=0.4*large_dedendum_radius,
+				thickness=2*gear_thickness,
+				numberTeeth=2*number_spokes,
+				toothLength=0.2*large_dedendum_radius)
+
+			tooth(
+				toothLength=0.3*large_dedendum_radius,
+				thickness=2*gear_thickness,
+				toothLean=50,
+				toothSharpness=50,
+				clubSize=0,
+				clubAngle=0);
+
+			rotate(ratchetAdjust,[0,0,1])
+			for (i=[0:number_spokes-1])
+			{
+				rotate(i*360/number_spokes,[0,0,1])
+				translate([0,0,gear_thickness])
+				ratchetArm(
+					height=gear_thickness+1, 
+					width=0.1*large_dedendum_radius,
+					 length=0.8*large_dedendum_radius,
+					headLength=large_dedendum_radius/2,
+					angle=-90,
+					distance=0.5*large_dedendum_radius);
+			}
+
+			color(structure_color)
+			ring(sleeve_radius,bore_radius,gear_thickness+drum_height+sleeve_extension);
+		}
+	}
+
+	if (negative_space==true)
+	{
+		color(structure_color)
+		translate([0,0,-space])
+		union()
+		{
+			ring(large_addendum_radius+space,0,gear_thickness+2*space);
 
 			ring(sleeve_radius+space,0,drum_height+sleeve_extension+2*space);
 		}
