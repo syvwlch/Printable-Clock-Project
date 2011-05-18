@@ -26,7 +26,7 @@ CC-A-SA licensed.*/
 	showToPrint=	true;		// true to show only one part, laid out for printing
 
 	showLimits=		false;		// in laid out to print mode, show the print volume limits
-	partToPrint=	-2;		// in laid out to print mode, which part to show
+	partToPrint=	2;		// in laid out to print mode, which part to show
 
 	showShafts=	true;		// whether to show the metal shafts in assembled clock
 	showFrame=	true;		// whether to show the frame in assembled clock
