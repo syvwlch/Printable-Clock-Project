@@ -21,17 +21,17 @@ CC-A-SA licensed.*/
 	boltHeadThickness=3*scale;	// thickness for the counter-sunk holes in the frame for bolt heads
 
 // Command Parameters
-	showAssembly=	true;		// true to show the whole clock, assembled
-	showToPrint=	false;		// true to show only one part, laid out for printing
+	showAssembly=	false;		// true to show the whole clock, assembled
+	showToPrint=	true;		// true to show only one part, laid out for printing
 
-	showLimits=		false;		// in laid out to print mode, show the print volume limits
+	showLimits=		true;		// in laid out to print mode, show the print volume limits
 	partToPrint=	01;		// in laid out to print mode, which part to show
 
 	showShafts=	true;		// whether to show the metal shafts in assembled clock
 	showFrame=	true;		// whether to show the frame in assembled clock
 	explodeZ=		0*scale;	// exploded view parameter for assembled clock
 
-	showNegativeSpace=true;	// whether to show the negative space version of the parts
+	showNegativeSpace=false;	// whether to show the negative space version of the parts
 	negativeMargin=	0*scale;	// margin around the negative space version of the parts
 
 // Clock parameters
@@ -43,9 +43,9 @@ CC-A-SA licensed.*/
 						// 0 means no herringbone gears at all
 
 	// primary rotation of the slowest wheel, usually the hours' hand 
-		rotation_angle=0;// -(3600*1+60*50+30)/120;
+		rotation_angle= -(3600*1+60*50+30)/120;
 
-	gearExists1=	1;		// 1:drum
+	gearExists1=	-2;		// 1:drum, -2: ratcheting drum
 	gearExists2=	2;		// 2:pinion gear, 3: escapement wheel
 	gearExists3=	2;		// 2:pinion gear, 3: escapement wheel, 4:escapement
 	gearExists4=	2;		// 0: none, 2:pinion gear, 3: escapement wheel, 4:escapement
