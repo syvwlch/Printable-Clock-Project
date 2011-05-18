@@ -31,7 +31,7 @@ CC-A-SA licensed.*/
 	showFrame=	true;		// whether to show the frame in assembled clock
 	explodeZ=		0*scale;	// exploded view parameter for assembled clock
 
-	showNegativeSpace=true;	// whether to show the negative space version of the parts
+	showNegativeSpace=false;	// whether to show the negative space version of the parts
 	negativeMargin=	0*scale;	// margin around the negative space version of the parts
 
 // Clock parameters
@@ -45,7 +45,7 @@ CC-A-SA licensed.*/
 	// primary rotation of the slowest wheel, usually the hours' hand 
 		rotation_angle=0;// -(3600*1+60*50+30)/120;
 
-	gearExists1=	1;		// 1:drum
+	gearExists1= 	1; // 1:drum, -2: ratcheting drum
 	gearExists2=	3;		// 2:pinion gear, 3: escapement wheel
 	gearExists3=	4;		// 2:pinion gear, 3: escapement wheel, 4:escapement
 	gearExists4=	0;		// 0: none, 2:pinion gear, 3: escapement wheel, 4:escapement
