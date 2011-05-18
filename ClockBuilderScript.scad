@@ -21,7 +21,7 @@ spokeWidth=5*scale; 			// width of the spokes
 // Drum Parameters
 numberSpokes=5;				// number of spokes in the drum
 stringHoleRadius=1*scale;		// radius of the holes in the drum
-ratchetAdjust=-15;			// needs to be adjusted based on number of spokes (e.g. -15 for 5 spokes)
+ratchetAdjust=20;			// needs to be adjusted based on number of spokes (e.g. -15 for 5 spokes)
 
 
 // Escapement Wheel Parameters
@@ -201,6 +201,35 @@ module trapezoidkey(base, top, height, thickness,plug=0)
 		);
 }
 
+module ratchet1(negativeSpace=false)
+{
+	if (gearExists1!=-2)
+	cube(0);
+
+	if (gearExists1==-2)
+	ratchetDrum(
+		drum_height=			drumHeight-spacer, 
+		large_gear_teeth=		abs(ratio1)*pinion1,
+		large_gear_circular_pitch=	circular_pitch1,
+		gear_clearance=			gearClearance,
+		gear_spacer=			gearSpacer,
+		rim_width=				rimWidth,
+		sleeve_level=			sleeveLevel1+1,
+		pin_radius=				pinRadius,
+		sleeve_thickness=			sleeveThickness,
+		loose_fit=				clearance,
+		gear_thickness=			thickness,
+		sleeve_extension=		spacer,
+		spacer=				spacer, 
+		number_spokes=			numberSpokes,
+		spoke_width=			spokeWidth,
+		number_holes=			numberSpokes, 
+		hole_radius=			stringHoleRadius,
+		notch_angle=			correction1,
+		negative_space=			negativeSpace,
+		space=				negativeMargin);
+}
+
 module pinion1(negativeSpace=false)
 {
 	if (gearExists1==1)
@@ -265,8 +294,6 @@ module pinion1(negativeSpace=false)
 		spacer=				spacer, 
 		number_spokes=			numberSpokes,
 		spoke_width=			spokeWidth,
-		number_holes=			numberSpokes, 
-		hole_radius=			stringHoleRadius,
 		notch_angle=			correction1,
 		negative_space=			negativeSpace,
 		space=				negativeMargin);
@@ -938,6 +965,10 @@ module assembled(showShafts=false,showFrame=false,negativeSpace=false)
 					space=			negativeMargin);
 	
 				pinion1(negativeSpace);
+
+				if (gearExists1==-2)
+				translate([0,0,thickness+0.05+0.5*explodeZ])
+				ratchet1(negativeSpace);
 			}
 		
 			// pinion #2
@@ -1189,6 +1220,20 @@ module laidOutToPrint(index,show_limits=false,negativeSpace=false)
 	{
 		showPrintLimit(printLimit);
 		showPrintLimit(extremeLimit);
+	}
+
+	if (index == -2)
+	{
+		if (gearExists1!=-2)
+		{
+			echo("This part is not needed!");	
+		}
+
+		if (gearExists1==-2)
+		{
+			echo("Printing ratchet drum!");	
+			ratchet1(negativeSpace);
+		}
 	}
 
 	if (index == -1)
