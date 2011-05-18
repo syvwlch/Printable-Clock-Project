@@ -15,12 +15,13 @@ pinRadius=1.5*scale; 			// radius of the pins (0 if not using any)
 sleeveThickness=2*scale;		// thickness of the sleeves fitting over the pins, or over each other
 tightFit=0.25*scale;			// clearance between hands and sleeves
 clearance=0.5*scale;			// clearance between pin and sleeve, or between sleeve and sleeve
-spokeWidth=3*scale; 			// width of the spokes
+spokeWidth=5*scale; 			// width of the spokes
 
 
 // Drum Parameters
 numberSpokes=5;				// number of spokes in the drum
 stringHoleRadius=1*scale;		// radius of the holes in the drum
+ratchetAdjust=-15;			// needs to be adjusted based on number of spokes (e.g. -15 for 5 spokes)
 
 
 // Escapement Wheel Parameters
@@ -212,6 +213,40 @@ module pinion1(negativeSpace=false)
 		notch_angle=		correction1,
 		negative_space=		negativeSpace)
 	pinionDrum(
+		drum_height=			drumHeight, 
+		large_gear_teeth=		abs(ratio1)*pinion1,
+		large_gear_circular_pitch=	circular_pitch1,
+		gear_clearance=			gearClearance,
+		gear_backlash=			gearBacklash,
+		gear_spacer=			gearSpacer,
+		pressure_angle=			pressureAngle,
+		twist_factor=			twistFactor,
+		rim_width=				rimWidth,
+		sleeve_level=			sleeveLevel1,
+		pin_radius=				pinRadius,
+		sleeve_thickness=			sleeveThickness,
+		loose_fit=				clearance,
+		gear_thickness=			thickness,
+		sleeve_extension=		sleeveExtension1,
+		spacer=				spacer, 
+		number_spokes=			numberSpokes,
+		spoke_width=			spokeWidth,
+		number_holes=			numberSpokes, 
+		hole_radius=			stringHoleRadius,
+		notch_angle=			correction1,
+		negative_space=			negativeSpace,
+		space=				negativeMargin);
+
+	if (gearExists1==-2)
+	handNotch(
+		notch_height=		drumThickness+sleeveExtension1-handThickness,
+		notch_width=		handWidth1,
+		sleeve_level=		sleeveLevel1,
+		pin_radius=			pinRadius,
+		sleeve_thickness=		sleeveThickness,
+		notch_angle=		correction1,
+		negative_space=		negativeSpace)
+	ratchetGear(
 		drum_height=			drumHeight, 
 		large_gear_teeth=		abs(ratio1)*pinion1,
 		large_gear_circular_pitch=	circular_pitch1,
