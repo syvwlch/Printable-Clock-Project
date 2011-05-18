@@ -15,15 +15,15 @@ CC-A-SA licensed.*/
 	thickness=6*scale; 		// thickness along the Z axis 
 	spacer=1*scale;		 	// space between gears in a wheel along z axis
 
-	drumHeight=2*thickness; 	// height of the drum (along z), only for drum pinion
-
+	drumHeight=3*thickness; 	// height of the drum (along z), only for drum pinion
+	ratchetAdjust=30; 		// needs to be adjusted based on number of spokes (e.g. 20 for 5 spokes)
 
 // Command Parameters
 	showAssembly=	false;		// true to show the whole clock, assembled
 	showToPrint=	true;		// true to show only one part, laid out for printing
 
 	showLimits=		false;		// in laid out to print mode, show the print volume limits
-	partToPrint=	12;		// in laid out to print mode, which part to show
+	partToPrint=	-2;		// in laid out to print mode, which part to show
 
 	showShafts=	true;		// whether to show the metal shafts in assembled clock
 	showFrame=	true;		// whether to show the frame in assembled clock
@@ -43,7 +43,7 @@ CC-A-SA licensed.*/
 	// primary rotation of the slowest wheel, usually the hours' hand 
 		rotation_angle=0;// -(3600*1+60*50+30)/120;
 
-	gearExists1=	1;		// 1:drum
+	gearExists1=	-2;		// 1:drum, -2: ratcheting drum
 	gearExists2=	2;		// 2:pinion gear, 3: escapement wheel
 	gearExists3=	2;		// 2:pinion gear, 3: escapement wheel, 4:escapement
 	gearExists4=	2;		// 0: none, 2:pinion gear, 3: escapement wheel, 4:escapement
