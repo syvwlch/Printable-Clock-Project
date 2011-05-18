@@ -21,7 +21,6 @@ spokeWidth=5*scale; 			// width of the spokes
 // Drum Parameters
 numberSpokes=5;				// number of spokes in the drum
 stringHoleRadius=1*scale;		// radius of the holes in the drum
-ratchetAdjust=20;			// needs to be adjusted based on number of spokes (e.g. -15 for 5 spokes)
 
 
 // Escapement Wheel Parameters
