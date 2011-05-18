@@ -16,6 +16,7 @@ CC-A-SA licensed.*/
 	spacer=1*scale;		 	// space between gears in a wheel along z axis
 
 	drumHeight=3*thickness; 	// height of the drum (along z), only for drum pinion
+	ratchetAdjust=20; 		// needs to be adjusted based on number of spokes (e.g. 20 for 5 spokes)
 
 	boltHeadRadius=3*scale; 	// radius for the counter-sunk holes in the frame for bolt heads
 	boltHeadThickness=3*scale;	// thickness for the counter-sunk holes in the frame for bolt heads
@@ -25,7 +26,7 @@ CC-A-SA licensed.*/
 	showToPrint=	true;		// true to show only one part, laid out for printing
 
 	showLimits=		false;		// in laid out to print mode, show the print volume limits
-	partToPrint=	2;		// in laid out to print mode, which part to show
+	partToPrint=	-2;		// in laid out to print mode, which part to show
 
 	showShafts=	true;		// whether to show the metal shafts in assembled clock
 	showFrame=	true;		// whether to show the frame in assembled clock
