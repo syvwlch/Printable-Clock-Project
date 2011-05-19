@@ -26,7 +26,7 @@ CC-A-SA licensed.*/
 	showToPrint=	true;		// true to show only one part, laid out for printing
 
 	showLimits=		false;		// in laid out to print mode, show the print volume limits
-	partToPrint=	2;		// in laid out to print mode, which part to show
+	partToPrint=	4;		// in laid out to print mode, which part to show
 
 	showShafts=	true;		// whether to show the metal shafts in assembled clock
 	showFrame=	true;		// whether to show the frame in assembled clock
@@ -59,7 +59,7 @@ CC-A-SA licensed.*/
 
 	ratio1=		-4; 			// 4 
 	ratio2=		-3; 			// 12
-	ratio3=		-3.2; 			// 3.2
+	ratio3=		-3.199999; 			// 3.2
 	ratio4=		-3;			// 9.6
 	ratio5=		-2.5; 			// 24
 	ratio6=		-2.5; 			// 60
