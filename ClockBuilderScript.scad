@@ -866,23 +866,34 @@ module escapementPendulum(sleeve_level,sleeve_extension,negativeSpace=false)
 				trapezoidkey(snapFitBase, snapFitTop, snapFitHeight, hubHeight+8,1);
 			}
 
+			rotate((showToPrint==true ? 90 : 0),[0,0,1]) 
+			translate(
+				[(showToPrint==true ? -printLimit/2-pendulumLength : 0),
+				(showToPrint==true ? -printLimit/2 : 0),
+				0])
 			translate([pendulumLength,0,hubHeight/2])
 			difference()
 			{
 				union()
 				{
-					translate([tightFit,-pendulumRadius,-hubHeight/2])
-					cube([pendulumLength-2*(snapFitHeight+tightFit),2*pendulumRadius,hubHeight]);
-	
 					rotate(90,[0,0,1])
 					trapezoidkey(snapFitBase-tightFit, snapFitTop-tightFit, snapFitHeight-tightFit, hubHeight, tightFit);
+
+					translate([tightFit,-pendulumRadius,-hubHeight/2])
+					cube([pendulumLength-2*(snapFitHeight+tightFit),2*pendulumRadius,hubHeight]);
+
+					translate([tightFit+printLimit-pendulumRadius,-pendulumRadius,-hubHeight/2])
+					cube([pendulumLength-2*(snapFitHeight+tightFit),2*pendulumRadius,hubHeight]);
+
+					translate([tightFit+pendulumRadius,-pendulumRadius/2,-hubHeight/2])
+					cube([printLimit-2*(snapFitHeight+tightFit),pendulumRadius,hubHeight]);
 				}
 
 				rotate(90,[0,0,1])
-				translate ([0,-(pendulumLength-2*(snapFitHeight+tightFit)),-1])
+				translate ([0,-(printLimit+2*pendulumRadius-2*(snapFitHeight+tightFit)),-1])
 				trapezoidkey(snapFitBase, snapFitTop, snapFitHeight, hubHeight+8,1);
 
-				translate ([(pendulumLength-2*(snapFitHeight+tightFit))/2,0,-hubHeight])
+				translate ([printLimit,0,-hubHeight])
 				ring(pinRadius+clearance,0,2*hubHeight);
 			}
 
