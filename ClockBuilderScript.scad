@@ -915,7 +915,7 @@ module pinion9(negativeSpace=false)
 		clubAngle=				clubAngle);
 }
 
-module escapementPendulum(sleeve_level,sleeve_extension,negativeSpace=false)
+module escapementPendulum(sleeve_level,sleeve_extension,spacer,negativeSpace=false)
 {
 	pin_radius=(sleeve_extension==0 ? bearingRadius : pinRadius);
 	bore_radius=pin_radius+sleeve_level*sleeveThickness+clearance;
@@ -972,9 +972,9 @@ module escapementPendulum(sleeve_level,sleeve_extension,negativeSpace=false)
 
 		}
 
-		if(negativeSpace==false) {ring(sleeve_radius,bore_radius,thickness+sleeve_extension);}
+		if(negativeSpace==false) {ring(sleeve_radius,bore_radius,thickness+sleeve_extension+spacer);}
 
-		if(negativeSpace==true) {translate([0,0,-negativeMargin])ring(sleeve_radius+negativeMargin,0,thickness+sleeve_extension+2*negativeMargin);}
+		if(negativeSpace==true) {translate([0,0,-negativeMargin])ring(sleeve_radius+negativeMargin,0,thickness+sleeve_extension+spacer+2*negativeMargin);}
 
 		escapement(
 			escapement_radius,
