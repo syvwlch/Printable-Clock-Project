@@ -53,7 +53,7 @@ snapFitHeight=snapFitBase;				// dimensions of the snap-fit end on the pendulum 
 // Gear Parameters
 pressureAngle=14.5;			// pressure angle for all the gears
 rimWidth=4*scale;			// width of the rim, measured from the dedendum (bottom of the teeth)
-gearClearance=0.2*scale;		// clearance for all the gears
+gearClearance=0.2*scale;		// clearance for all the gears - default=0.2
 gearBacklash=0.2*scale;		// backlash for all the gears
 gearSpacer=0.5*scale;			// assymetrical axial spacer so the large gear doesn't run into the shoulder supporting the small gear
 
