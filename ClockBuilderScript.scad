@@ -202,30 +202,38 @@ module trapezoidkey(base, top, height, thickness,plug=0)
 
 module ratchet1(negativeSpace=false)
 {
-	if (gearExists1!=-2)
+	if (gearExists1!=1)
 	cube(0);
 
-	if (gearExists1==-2)
+	if (gearExists1==1)
 	ratchetDrum(
 		drum_height=			drumHeight-spacer, 
+		clockwise=			true,
 		large_gear_teeth=		abs(ratio1)*pinion1,
 		large_gear_circular_pitch=	circular_pitch1,
-		gear_clearance=			gearClearance,
+		small_gear_teeth=		0,
+		small_gear_circular_pitch=	0,
+		gear_clearance=		gearClearance,
+		gear_backlash=			gearBacklash,
 		gear_spacer=			gearSpacer,
-		rim_width=				rimWidth,
 		sleeve_level=			sleeveLevel1+1,
 		pin_radius=				pinRadius,
-		sleeve_thickness=			sleeveThickness,
+		pressure_angle=		pressureAngle,
+		twist_factor=			twistFactor,
+		rim_width=			rimWidth,
+		sleeve_thickness=		sleeveThickness,
 		loose_fit=				clearance,
-		gear_thickness=			thickness,
+		gear_thickness=		thickness,
 		sleeve_extension=		spacer,
 		spacer=				spacer, 
-		number_spokes=			numberSpokes,
+		number_spokes=		numberSpokes,
 		spoke_width=			spokeWidth,
 		number_holes=			numberSpokes, 
 		hole_radius=			stringHoleRadius,
 		notch_angle=			correction1,
-		negative_space=			negativeSpace,
+		negative_space=		negativeSpace,
+		space=				negativeMargin);
+}
 		space=				negativeMargin);
 }
 
