@@ -674,6 +674,7 @@ module pinionEscapementWheel (
 	gear_thickness,
 	sleeve_extension,
 	spacer,
+	number_spokes=5,
 	spoke_width,
 	notch_angle=0,
 	negative_space=false,
@@ -708,7 +709,7 @@ module pinionEscapementWheel (
 				tooth_length,
 				tooth_lean,
 				tooth_sharpness,
-				small_gear_teeth,
+				number_spokes,
 				spoke_width,
 				small_addendum_radius,
 				bore_radius,
@@ -717,14 +718,23 @@ module pinionEscapementWheel (
 
 			color(structure_color)
 			translate([0,0,gear_thickness-gear_spacer])
-			drum(	small_addendum_radius,rim_width,spacer);
+			drum(
+				radius=radius-tooth_length+rim_width,
+				rimWidth=rim_width,
+				drumHeight=spacer,
+				numberHoles=number_spokes,
+				holeRadius=min(1,(spacer+gear_spacer)/6),
+				holeRotate=180/number_spokes);
 
 			color(structure_color)
 			ring(sleeve_radius,bore_radius,2*gear_thickness+spacer+sleeve_extension);
 
 			color(structure_color)
-			ring(small_addendum_radius-rim_width,bore_radius,gear_thickness+spacer-gear_spacer);
-			
+			spokes(number_spokes,radius-tooth_length,gear_thickness-gear_spacer+spacer,spoke_width,bore_radius,0);
+
+			color(structure_color)
+			ring(small_addendum_radius,bore_radius,gear_thickness-gear_spacer+spacer);
+
 			color(small_gear_color)
 			translate([0,0,gear_thickness*1.5+spacer])
 			gear (circular_pitch=small_gear_circular_pitch, 
