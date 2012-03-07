@@ -902,7 +902,8 @@ module ratchetArm(
 	length=23,
 	headLength=12,
 	angle=45,
-	distance=21) 
+	distance=21,
+	clockwise=true) 
 { 
 	circleRadius=10;
 
@@ -922,8 +923,15 @@ module ratchetArm(
 	}
 }
 
+module chirality(clockwise=true)
+{
+	if (clockwise==true) child(0);
+	if (clockwise!=true) mirror([0,0,1]) rotate(180,[1,0,0]) child(0);
+}
+
 module ratchetGear(
 	drum_height,
+	clockwise=true,
 	large_gear_teeth,
 	large_gear_circular_pitch,
 	gear_clearance=0.2,
@@ -1006,6 +1014,7 @@ module ratchetGear(
 
 			color(small_gear_color)
 			rotate(ratchetAdjust,[0,0,1])
+			chirality(clockwise)
 			ringTooth(
 				outerRadius=0.5*large_dedendum_radius,
 				innerRadius=0.4*large_dedendum_radius,
@@ -1041,6 +1050,7 @@ module ratchetGear(
 
 module ratchetDrum(
 	drum_height,
+	clockwise=true,
 	large_gear_teeth,
 	large_gear_circular_pitch,
 	gear_clearance=0.2,
@@ -1098,6 +1108,7 @@ module ratchetDrum(
 				holeRotate=notch_angle+180/number_holes);
 
 			color(large_gear_color)
+			chirality(clockwise)
 			rotate(ratchetAdjust,[0,0,1])
 			for (i=[0:number_spokes-1])
 			{
