@@ -525,6 +525,7 @@ module pinionWheel(
 	gear_thickness,
 	sleeve_extension,
 	spacer,
+	number_spokes=5,
 	spoke_width,
 	notch_angle=0,
 	negative_space=false,
@@ -594,8 +595,7 @@ module pinionWheel(
 			ring(sleeve_radius,bore_radius,2*gear_thickness+spacer+sleeve_extension);
 
 			color(structure_color)
-			spokes(small_gear_teeth,large_dedendum_radius-rim_width,gear_thickness-gear_spacer,spoke_width,bore_radius,0);
-
+			spokes(number_spokes,large_dedendum_radius-rim_width,gear_thickness-gear_spacer+spacer,spoke_width,bore_radius,0);
 
 			if (small_gear_teeth!=0)
 			{
