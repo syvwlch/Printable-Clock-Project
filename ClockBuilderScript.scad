@@ -234,6 +234,38 @@ module ratchet1(negativeSpace=false)
 		negative_space=		negativeSpace,
 		space=				negativeMargin);
 }
+
+module ratchet2(negativeSpace=false)
+{
+	if (gearExists2!=1)
+	cube(0);
+
+	if (gearExists2==1)
+	ratchetDrum(
+		drum_height=			drumHeight-spacer, 
+		clockwise=			false,
+		large_gear_teeth=		abs(ratio2)*pinion2,
+		large_gear_circular_pitch=	circular_pitch2-trimCircularPitch,
+		small_gear_teeth=		pinion1,
+		small_gear_circular_pitch=	circular_pitch1-trimCircularPitch,
+		gear_clearance=		gearClearance,
+		gear_backlash=			gearBacklash,
+		gear_spacer=			gearSpacer,
+		pressure_angle=		pressureAngle,
+		twist_factor=			twistFactor,
+		rim_width=			rimWidth,
+		sleeve_level=			sleeveLevel2,//+1,
+		pin_radius=			(sleeveExtension2==0 ? bearingRadius : pinRadius),
+		sleeve_thickness=		sleeveThickness,
+		loose_fit=				clearance,
+		gear_thickness=		thickness,
+		sleeve_extension=		spacer,
+		spacer=				spacer, 
+		spoke_width=			spokeWidth,
+		number_holes=			numberSpokes, 
+		hole_radius=			stringHoleRadius,
+		notch_angle=			correction2,
+		negative_space=		negativeSpace,
 		space=				negativeMargin);
 }
 
