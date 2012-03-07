@@ -1268,26 +1268,33 @@ module laidOutToPrint(index,show_limits=false,negativeSpace=false)
 		showPrintLimit(extremeLimit);
 	}
 
-	if (index == -2)
+	if (index == -1)
 	{
-		if (gearExists1!=-2)
+		if (gearExists1!=1)
 		{
 			echo("This part is not needed!");	
 		}
 
-		if (gearExists1==-2)
+		if (gearExists1==1)
 		{
 			echo("Printing ratchet drum!");	
 			ratchet1(negativeSpace);
 		}
 	}
 
-	if (index == -1)
+	if (index == -2)
 	{
-		echo("Showing negative space of entire clock without frame!");
-		assembled(true,false,true);
-	}
+		if (gearExists2!=1)
+		{
+			echo("This part is not needed!");	
+		}
 
+		if (gearExists2==1)
+		{
+			echo("Printing ratchet drum!");	
+			ratchet2(negativeSpace);
+		}
+	}
 
 	handPrintSpacing=printLimit/5;
 	handPrintOffset=-printLimit/10;
