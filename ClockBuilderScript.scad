@@ -308,6 +308,38 @@ module pinion1(negativeSpace=false)
 
 module pinion2(negativeSpace=false)
 {
+	if (gearExists2==1)
+	handNotch(
+		notch_height=			drumThickness+sleeveExtension2-handThickness,
+		notch_width=			handWidth2,
+		sleeve_level=			sleeveLevel2,
+		pin_radius=			(sleeveExtension2==0 ? bearingRadius : pinRadius),
+		sleeve_thickness=		sleeveThickness,
+		notch_angle=			correction2,
+		negative_space=		negativeSpace)
+	ratchetGear(
+		drum_height=			drumHeight, 
+		clockwise=			false,
+		large_gear_teeth=		abs(ratio2)*pinion2,
+		large_gear_circular_pitch=	circular_pitch2-trimCircularPitch,
+		gear_clearance=		gearClearance,
+		gear_backlash=			gearBacklash,
+		gear_spacer=			gearSpacer,
+		pressure_angle=		pressureAngle,
+		twist_factor=			twistFactor,
+		rim_width=			rimWidth,
+		sleeve_level=			sleeveLevel2,
+		pin_radius=			(sleeveExtension2==0 ? bearingRadius : pinRadius),
+		sleeve_thickness=		sleeveThickness,
+		loose_fit=				clearance,
+		gear_thickness=		thickness,
+		sleeve_extension=		sleeveExtension2,
+		spacer=				spacer, 
+		spoke_width=			spokeWidth,
+		notch_angle=			correction2,
+		negative_space=		negativeSpace,
+		space=				negativeMargin);
+
 	if (gearExists2==2)
 	handNotch(
 		notch_height=			pinionThickness+sleeveExtension2-handThickness,
