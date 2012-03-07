@@ -241,12 +241,12 @@ module pinion1(negativeSpace=false)
 {
 	if (gearExists1==1)
 	handNotch(
-		notch_height=		drumThickness+sleeveExtension1-handThickness,
-		notch_width=		handWidth1,
-		sleeve_level=		sleeveLevel1,
+		notch_height=			drumThickness+sleeveExtension1-handThickness,
+		notch_width=			handWidth1,
+		sleeve_level=			sleeveLevel1,
 		pin_radius=			(sleeveExtension1==0 ? bearingRadius : pinRadius),
 		sleeve_thickness=		sleeveThickness,
-		notch_angle=		correction1,
+		notch_angle=			correction1,
 		negative_space=		negativeSpace)
 	pinionDrum(
 		drum_height=			drumHeight, 
@@ -255,54 +255,54 @@ module pinion1(negativeSpace=false)
 		large_gear_circular_pitch=	circular_pitch1-trimCircularPitch,
 		gear_backlash=			gearBacklash,
 		gear_spacer=			gearSpacer,
-		pressure_angle=			pressureAngle,
+		pressure_angle=		pressureAngle,
 		twist_factor=			twistFactor,
-		rim_width=				rimWidth,
+		rim_width=			rimWidth,
 		sleeve_level=			sleeveLevel1,
-		sleeve_thickness=			sleeveThickness,
 		pin_radius=			(sleeveExtension1==0 ? bearingRadius : pinRadius),
+		sleeve_thickness=		sleeveThickness,
 		loose_fit=				clearance,
-		gear_thickness=			thickness,
+		gear_thickness=		thickness,
 		sleeve_extension=		sleeveExtension1,
 		spacer=				spacer, 
-		number_spokes=			numberSpokes,
+		number_spokes=		numberSpokes,
 		spoke_width=			spokeWidth,
 		number_holes=			numberSpokes, 
 		hole_radius=			stringHoleRadius,
 		notch_angle=			correction1,
-		negative_space=			negativeSpace,
+		negative_space=		negativeSpace,
 		space=				negativeMargin);
 
 	if (gearExists1==-2)
 	handNotch(
 		notch_height=		drumThickness+sleeveExtension1-handThickness,
-		notch_width=		handWidth1,
-		sleeve_level=		sleeveLevel1,
+		notch_width=			handWidth1,
+		sleeve_level=			sleeveLevel1,
 		pin_radius=			(sleeveExtension1==0 ? bearingRadius : pinRadius),
 		sleeve_thickness=		sleeveThickness,
-		notch_angle=		correction1,
+		notch_angle=			correction1,
 		negative_space=		negativeSpace)
 	ratchetGear(
 		drum_height=			drumHeight, 
 		large_gear_teeth=		abs(ratio1)*pinion1,
-		gear_clearance=			gearClearance,
 		large_gear_circular_pitch=	circular_pitch1-trimCircularPitch,
+		gear_clearance=		gearClearance,
 		gear_backlash=			gearBacklash,
 		gear_spacer=			gearSpacer,
-		pressure_angle=			pressureAngle,
+		pressure_angle=		pressureAngle,
 		twist_factor=			twistFactor,
-		rim_width=				rimWidth,
+		rim_width=			rimWidth,
 		sleeve_level=			sleeveLevel1,
-		sleeve_thickness=			sleeveThickness,
 		pin_radius=			(sleeveExtension1==0 ? bearingRadius : pinRadius),
+		sleeve_thickness=		sleeveThickness,
 		loose_fit=				clearance,
-		gear_thickness=			thickness,
+		gear_thickness=		thickness,
 		sleeve_extension=		sleeveExtension1,
 		spacer=				spacer, 
-		number_spokes=			numberSpokes,
+		number_spokes=		numberSpokes,
 		spoke_width=			spokeWidth,
 		notch_angle=			correction1,
-		negative_space=			negativeSpace,
+		negative_space=		negativeSpace,
 		space=				negativeMargin);
 }
 
@@ -310,72 +310,72 @@ module pinion2(negativeSpace=false)
 {
 	if (gearExists2==2)
 	handNotch(
-		notch_height=		pinionThickness+sleeveExtension2-handThickness,
-		notch_width=		handWidth2,
-		sleeve_level=		sleeveLevel2,
+		notch_height=			pinionThickness+sleeveExtension2-handThickness,
+		notch_width=			handWidth2,
+		sleeve_level=			sleeveLevel2,
 		pin_radius=			(sleeveExtension2==0 ? bearingRadius : pinRadius),
 		sleeve_thickness=		sleeveThickness,
-		notch_angle=		correction2,
+		notch_angle=			correction2,
 		negative_space=		negativeSpace)
 	pinionWheel(
 		large_gear_teeth=		abs(ratio2)*pinion2,
 		large_gear_circular_pitch=	circular_pitch2-trimCircularPitch,
 		small_gear_teeth=		pinion1,
-		gear_clearance=			gearClearance,
 		small_gear_circular_pitch=	circular_pitch1-trimCircularPitch,
+		gear_clearance=		gearClearance,
 		gear_backlash=			gearBacklash,
 		gear_spacer=			gearSpacer,
-		pressure_angle=			pressureAngle,
+		pressure_angle=		pressureAngle,
 		twist_factor=			twistFactor,
-		rim_width=				rimWidth,
+		rim_width=			rimWidth,
 		sleeve_level=			sleeveLevel2,
-		sleeve_thickness=			sleeveThickness,
 		pin_radius=			(sleeveExtension2==0 ? bearingRadius : pinRadius),
+		sleeve_thickness=		sleeveThickness,
 		loose_fit=				clearance,
-		gear_thickness=			thickness,
+		gear_thickness=		thickness,
 		sleeve_extension=		sleeveExtension2,
 		spacer=				spacer, 
 		spoke_width=			spokeWidth,
 		notch_angle=			correction2,
-		negative_space=			negativeSpace,
+		negative_space=		negativeSpace,
 		space=				negativeMargin);
 
 	if (gearExists2==3)
 	handNotch(
-		notch_height=		pinionThickness+sleeveExtension2-handThickness,
-		notch_width=		handWidth2,
-		sleeve_level=		sleeveLevel2,
+		notch_height=			pinionThickness+sleeveExtension2-handThickness,
+		notch_width=			handWidth2,
+		sleeve_level=			sleeveLevel2,
 		pin_radius=			(sleeveExtension2==0 ? bearingRadius : pinRadius),
 		sleeve_thickness=		sleeveThickness,
-		notch_angle=		correction2,
+		notch_angle=			correction2,
 		negative_space=		negativeSpace)
 	pinionEscapementWheel(
 		radius=				escapement_radius,
 		escapement_teeth=		numberTeeth,
 		tooth_length=			toothLength, 
 		tooth_lean=			toothLean,
-		tooth_sharpness=			toothSharpness,
+		tooth_sharpness=		toothSharpness,
 		small_gear_teeth=		pinion1,
-		gear_clearance=			gearClearance,
 		small_gear_circular_pitch=	circular_pitch1-trimCircularPitch,
+		gear_clearance=		gearClearance,
 		gear_backlash=			gearBacklash,
 		gear_spacer=			gearSpacer,
-		pressure_angle=			pressureAngle,
+		pressure_angle=		pressureAngle,
 		twist_factor=			twistFactor,
-		rim_width=				rimWidth,
+		rim_width=			rimWidth,
 		sleeve_level=			sleeveLevel2,
-		sleeve_thickness=			sleeveThickness,
 		pin_radius=			(sleeveExtension2==0 ? bearingRadius : pinRadius),
+		sleeve_thickness=		sleeveThickness,
 		loose_fit=				clearance,
-		gear_thickness=			thickness,
+		gear_thickness=		thickness,
 		sleeve_extension=		sleeveExtension2,
 		spacer=				spacer, 
 		spoke_width=			spokeWidth,
 		notch_angle=			correction2,
-		negative_space=			negativeSpace,
+		negative_space=		negativeSpace,
 		space=				negativeMargin, 
 		clubSize=				clubSize,
-		clubAngle=				clubAngle);
+		clubAngle=			clubAngle);
 }
 
 module pinion3(negativeSpace=false)
@@ -853,9 +853,9 @@ module pinion9(negativeSpace=false)
 
 module escapementPendulum(sleeve_level,sleeve_extension,negativeSpace=false)
 {
-	bore_radius=pinRadius+sleeve_level*sleeveThickness+clearance;
-	sleeve_radius=pinRadius+(sleeve_level+1)*sleeveThickness;
 	pin_radius=(sleeve_extension==0 ? bearingRadius : pinRadius);
+	bore_radius=pin_radius+sleeve_level*sleeveThickness+clearance;
+	sleeve_radius=pin_radius+(sleeve_level+1)*sleeveThickness;
 
 	union()
 	{
