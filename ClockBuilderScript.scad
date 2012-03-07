@@ -1296,7 +1296,7 @@ module laidOutToPrint(index,show_limits=false,negativeSpace=false)
 		}
 	}
 
-	handPrintSpacing=printLimit/5;
+	handPrintSpacing=printLimit/4;
 	handPrintOffset=-printLimit/10;
 
 	if (index == 0)
