@@ -248,11 +248,12 @@ module pinion1(negativeSpace=false)
 		sleeve_thickness=		sleeveThickness,
 		notch_angle=			correction1,
 		negative_space=		negativeSpace)
-	pinionDrum(
+	ratchetGear(
 		drum_height=			drumHeight, 
+		clockwise=			true,
 		large_gear_teeth=		abs(ratio1)*pinion1,
-		gear_clearance=			gearClearance,
 		large_gear_circular_pitch=	circular_pitch1-trimCircularPitch,
+		gear_clearance=		gearClearance,
 		gear_backlash=			gearBacklash,
 		gear_spacer=			gearSpacer,
 		pressure_angle=		pressureAngle,
@@ -267,25 +268,24 @@ module pinion1(negativeSpace=false)
 		spacer=				spacer, 
 		number_spokes=		numberSpokes,
 		spoke_width=			spokeWidth,
-		number_holes=			numberSpokes, 
-		hole_radius=			stringHoleRadius,
 		notch_angle=			correction1,
 		negative_space=		negativeSpace,
 		space=				negativeMargin);
 
-	if (gearExists1==-2)
+	if (gearExists1==2)
 	handNotch(
-		notch_height=		drumThickness+sleeveExtension1-handThickness,
+		notch_height=			pinionThickness+sleeveExtension1-handThickness,
 		notch_width=			handWidth1,
 		sleeve_level=			sleeveLevel1,
 		pin_radius=			(sleeveExtension1==0 ? bearingRadius : pinRadius),
 		sleeve_thickness=		sleeveThickness,
 		notch_angle=			correction1,
 		negative_space=		negativeSpace)
-	ratchetGear(
-		drum_height=			drumHeight, 
+	pinionWheel(
 		large_gear_teeth=		abs(ratio1)*pinion1,
 		large_gear_circular_pitch=	circular_pitch1-trimCircularPitch,
+		small_gear_teeth=		0,
+		small_gear_circular_pitch=	0,
 		gear_clearance=		gearClearance,
 		gear_backlash=			gearBacklash,
 		gear_spacer=			gearSpacer,
