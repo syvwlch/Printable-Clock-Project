@@ -1002,27 +1002,27 @@ module ratchetGear(
 			ring(large_dedendum_radius,large_dedendum_radius-rim_width,gear_thickness);
 
 			color(structure_color)
-			ring(0.6*large_dedendum_radius,bore_radius,gear_thickness);
+			ring(0.6*large_dedendum_radius,bore_radius,gear_thickness+spacer);
 
 			color(small_gear_color)
 			rotate(ratchetAdjust,[0,0,1])
 			ringTooth(
 				outerRadius=0.5*large_dedendum_radius,
 				innerRadius=0.4*large_dedendum_radius,
-				thickness=2*gear_thickness,
+				thickness=2*gear_thickness+spacer,
 				numberTeeth=2*number_spokes,
 				toothLength=0.2*large_dedendum_radius)
 
 			tooth(
 				toothLength=0.3*large_dedendum_radius,
-				thickness=2*gear_thickness,
+				thickness=2*gear_thickness+spacer,
 				toothLean=-50,
 				toothSharpness=-50,
 				clubSize=0,
 				clubAngle=0);
 
 			color(structure_color)
-			ring(sleeve_radius,bore_radius,gear_thickness+drum_height+sleeve_extension);
+			ring(sleeve_radius,bore_radius,gear_thickness+0*drum_height+sleeve_extension);
 		}
 	}
 
@@ -1032,7 +1032,7 @@ module ratchetGear(
 		translate([0,0,-space])
 		union()
 		{
-			ring(large_addendum_radius+space,0,gear_thickness+2*space);
+			ring(large_addendum_radius+space,0,2*gear_thickness+2*space);
 
 			ring(sleeve_radius+space,0,drum_height+sleeve_extension+2*space);
 		}
@@ -1078,7 +1078,6 @@ module ratchetDrum(
 	{
 		union()
 		{
-			color(small_gear_color)
 			difference()
 			{
 				spokes(number_spokes,large_dedendum_radius-rim_width,drum_height,spoke_width,bore_radius,notch_angle);
@@ -1089,11 +1088,11 @@ module ratchetDrum(
 				square(size=0.4*large_dedendum_radius, center=true);
 			}
 
-			color(small_gear_color)
+			color(large_gear_color)
 			drum(
 				radius=large_dedendum_radius,
 				rimWidth=rim_width,
-				drumHeight=drum_height+gear_spacer,
+				drumHeight=drum_height,
 				numberHoles=number_holes,
 				holeRadius=min(hole_radius,(drum_height+gear_spacer)/6),
 				holeRotate=notch_angle+180/number_holes);
@@ -1123,7 +1122,7 @@ module ratchetDrum(
 		translate([0,0,-space])
 		union()
 		{
-			ring(large_addendum_radius+space,0,gear_thickness+2*space);
+			ring(large_addendum_radius+space,0,drum_height+2*space);
 
 			ring(sleeve_radius+space,0,drum_height+sleeve_extension+2*space);
 		}
