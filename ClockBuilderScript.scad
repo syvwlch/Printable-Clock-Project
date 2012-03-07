@@ -1033,7 +1033,7 @@ module assembled(showShafts=false,showFrame=false,negativeSpace=false)
 			{
 				if (handWidth1!=0)
 				rotate(correction1,[0,0,1])
-				translate([0,0,drumThickness+sleeveExtension1-handThickness+(1+1)*explodeZ])
+				translate([0,0,pinionThickness+sleeveExtension1-handThickness+(1+1)*explodeZ])
 				color([0,1,0])
 				hand(
 					hand_length=		handLength1,
@@ -1100,7 +1100,7 @@ module assembled(showShafts=false,showFrame=false,negativeSpace=false)
 				if (gearExists3==4)
 				rotate(pendulumCorrection-(rotation_angle3-fold_angle3),[0,0,1])
 				translate([0,0,deltaZ+explodeZ])
-				escapementPendulum(sleeveLevel3,sleeveExtension3,negativeSpace);
+				escapementPendulum(sleeveLevel3,sleeveExtension3,spacer,negativeSpace);
 			}
 	
 			//pinion #4
@@ -1127,7 +1127,7 @@ module assembled(showShafts=false,showFrame=false,negativeSpace=false)
 				if (gearExists4==4)
 				rotate(pendulumCorrection-(rotation_angle4-fold_angle4),[0,0,1])
 				translate([0,0,deltaZ+explodeZ])
-				escapementPendulum(sleeveLevel4,sleeveExtension4,negativeSpace);
+				escapementPendulum(sleeveLevel4,sleeveExtension4,spacer,negativeSpace);
 			}
 				
 			// pinion #5
@@ -1154,7 +1154,7 @@ module assembled(showShafts=false,showFrame=false,negativeSpace=false)
 				if (gearExists5==4)
 				rotate(pendulumCorrection-(rotation_angle5-fold_angle5),[0,0,1])
 				translate([0,0,deltaZ+explodeZ])
-				escapementPendulum(sleeveLevel5,sleeveExtension5,negativeSpace);
+				escapementPendulum(sleeveLevel5,sleeveExtension5,spacer,negativeSpace);
 			}
 	
 			//pinion #6
@@ -1181,7 +1181,7 @@ module assembled(showShafts=false,showFrame=false,negativeSpace=false)
 				if (gearExists6==4)
 				rotate(pendulumCorrection-(rotation_angle6-fold_angle6),[0,0,1])
 				translate([0,0,deltaZ+explodeZ])
-				escapementPendulum(sleeveLevel6,sleeveExtension6,negativeSpace);
+				escapementPendulum(sleeveLevel6,sleeveExtension6,spacer,negativeSpace);
 			}
 
 			//pinion #7
@@ -1208,7 +1208,7 @@ module assembled(showShafts=false,showFrame=false,negativeSpace=false)
 				if (gearExists7==4)
 				rotate(pendulumCorrection-(rotation_angle7-fold_angle7),[0,0,1])
 				translate([0,0,deltaZ+explodeZ])
-				escapementPendulum(sleeveLevel7,sleeveExtension7,negativeSpace);
+				escapementPendulum(sleeveLevel7,sleeveExtension7,spacer,negativeSpace);
 			}
 	
 			//pinion #8
@@ -1235,7 +1235,7 @@ module assembled(showShafts=false,showFrame=false,negativeSpace=false)
 				if (gearExists8==4)
 				rotate(pendulumCorrection-(rotation_angle8-fold_angle8),[0,0,1])
 				translate([0,0,deltaZ+explodeZ])
-				escapementPendulum(sleeveLevel8,sleeveExtension8,negativeSpace);
+				escapementPendulum(sleeveLevel8,sleeveExtension8,spacer,negativeSpace);
 			}
 									
 			//pinion#9
@@ -1262,7 +1262,7 @@ module assembled(showShafts=false,showFrame=false,negativeSpace=false)
 				if (gearExists9==4)
 				rotate(pendulumCorrection-(rotation_angle9-fold_angle9),[0,0,1])
 				translate([0,0,deltaZ+explodeZ])
-				escapementPendulum(sleeveLevel9,sleeveExtension9,negativeSpace);
+				escapementPendulum(sleeveLevel9,sleeveExtension9,spacer,negativeSpace);
 			}
 
 			//pinion #10
@@ -1271,7 +1271,7 @@ module assembled(showShafts=false,showFrame=false,negativeSpace=false)
 				if (gearExists10==4)
 				rotate(pendulumCorrection,[0,0,1])
 				translate([0,0,deltaZ+explodeZ])
-				escapementPendulum(sleeveLevel10,sleeveExtension10,negativeSpace);
+				escapementPendulum(sleeveLevel10,sleeveExtension10,spacer,negativeSpace);
 			}
 		}
 	}
@@ -1510,7 +1510,7 @@ module laidOutToPrint(index,show_limits=false,negativeSpace=false)
 	{
 		echo("Printing escapement!");
 
-		escapementPendulum(sleeveLevel10,sleeveExtension10,negativeSpace);
+		escapementPendulum(sleeveLevel10,sleeveExtension10,spacer,negativeSpace);
 	}
 
 	if (index == 11)
