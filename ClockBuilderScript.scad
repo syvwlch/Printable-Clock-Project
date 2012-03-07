@@ -20,7 +20,7 @@ $fs=0.25*scale;				// controls resolution for small details
 	//numberSpoke 		has been moved to the clock parameter script
 
 // Drum Parameters
-stringHoleRadius=1*scale;		// radius of the holes in the drum
+//stringHoleRadius=1*scale;		// radius of the holes in the drum
 
 
 // Escapement Wheel Parameters
