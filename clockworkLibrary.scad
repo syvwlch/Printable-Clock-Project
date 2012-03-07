@@ -50,6 +50,11 @@ v11 - 2011 05 18
 Modified to support the ratcheting drum designed by rustedrobot: http://www.thingiverse.com/thing:8555
 Backwards compatible, one-piece drum still available as an option
 
+v12 - 2012 02 06
+Modified after Clockathon #1 and #2
+PinionDrum deprecated, invoke pinionWheel instead, with number of teeth for the pinion gear set to zero.
+
+
 It includes the following modules:
  
 module ring(outerRadius,innerRadius,thickness,outerSegment=30,innerSegment=30)
@@ -505,8 +510,8 @@ module handNotch(
 module pinionWheel(
 	large_gear_teeth,
 	large_gear_circular_pitch,
-	small_gear_teeth,
-	small_gear_circular_pitch,
+	small_gear_teeth=0,
+	small_gear_circular_pitch=0,
 	gear_clearance=0.2,
 	gear_backlash=0.1,
 	gear_spacer=0.5,
@@ -577,7 +582,13 @@ module pinionWheel(
 
 			color(structure_color)
 			translate([0,0,gear_thickness-gear_spacer])
-			drum(	small_addendum_radius,rim_width,spacer);
+			drum(
+				radius=large_dedendum_radius,
+				rimWidth=rim_width,
+				drumHeight=spacer,
+				numberHoles=number_spokes,
+				holeRadius=min(1,(spacer+gear_spacer)/6),
+				holeRotate=180/number_spokes);
 
 			color(structure_color)
 			ring(sleeve_radius,bore_radius,2*gear_thickness+spacer+sleeve_extension);
@@ -585,41 +596,45 @@ module pinionWheel(
 			color(structure_color)
 			spokes(small_gear_teeth,large_dedendum_radius-rim_width,gear_thickness-gear_spacer,spoke_width,bore_radius,0);
 
-			color(structure_color)
-			ring(small_addendum_radius,bore_radius,gear_thickness-gear_spacer);
-			
-			color(small_gear_color)
-			translate([0,0,gear_thickness*1.5+spacer])
-			gear (circular_pitch=small_gear_circular_pitch, 
-				gear_thickness = 0, 
-				rim_thickness = gear_thickness/2,
-				rim_width = rim_width,
-				hub_thickness = gear_thickness/2, 
-				hub_diameter=small_dedendum_radius*2,
-				bore_diameter=bore_radius*2,  
-				circles=0,
-				pressure_angle=pressure_angle,
-				number_of_teeth=small_gear_teeth,
-				clearance=gear_clearance,
-				backlash=gear_backlash,
-				twist=-twist_factor*180/small_gear_teeth);
 
-			color(small_gear_color)
-			translate([0,0,gear_thickness*1.5+spacer])
-			mirror([0,0,1])
-			gear (circular_pitch=small_gear_circular_pitch, 
-				gear_thickness = 0, 
-				rim_thickness = gear_thickness/2+gear_spacer,
-				rim_width = rim_width,
-				hub_thickness = gear_thickness/2+gear_spacer, 
-				hub_diameter=small_dedendum_radius*2,
-				bore_diameter=bore_radius*2,  
-				circles=0,
-				pressure_angle=pressure_angle,
-				number_of_teeth=small_gear_teeth,
-				clearance=gear_clearance,
-				backlash=gear_backlash,
-				twist=-twist_factor*180/small_gear_teeth);
+			if (small_gear_teeth!=0)
+			{
+				color(structure_color)
+				ring(small_addendum_radius,bore_radius,gear_thickness-gear_spacer+spacer);
+
+				color(small_gear_color)
+				translate([0,0,gear_thickness*1.5+spacer])
+				gear (circular_pitch=small_gear_circular_pitch, 
+					gear_thickness = 0, 
+					rim_thickness = gear_thickness/2,
+					rim_width = rim_width,
+					hub_thickness = gear_thickness/2, 
+					hub_diameter=small_dedendum_radius*2,
+					bore_diameter=bore_radius*2,  
+					circles=0,
+					pressure_angle=pressure_angle,
+					number_of_teeth=small_gear_teeth,
+					clearance=gear_clearance,
+					backlash=gear_backlash,
+					twist=-twist_factor*180/small_gear_teeth);
+
+				color(small_gear_color)
+				translate([0,0,gear_thickness*1.5+spacer])
+				mirror([0,0,1])
+				gear (circular_pitch=small_gear_circular_pitch, 
+					gear_thickness = 0, 
+					rim_thickness = gear_thickness/2+gear_spacer,
+					rim_width = rim_width,
+					hub_thickness = gear_thickness/2+gear_spacer, 
+					hub_diameter=small_dedendum_radius*2,
+					bore_diameter=bore_radius*2,  
+					circles=0,
+					pressure_angle=pressure_angle,
+					number_of_teeth=small_gear_teeth,
+					clearance=gear_clearance,
+					backlash=gear_backlash,
+					twist=-twist_factor*180/small_gear_teeth);
+			}
 		}
 	}
 
@@ -761,7 +776,7 @@ module pinionEscapementWheel (
 
 }
 
-module pinionDrum (
+module pinionDrum (	//deprecated, use pinionWheel instead, with number of pinion teeth set to zero!
 	drum_height,
 	large_gear_teeth,
 	large_gear_circular_pitch,
@@ -786,6 +801,8 @@ module pinionDrum (
 	negative_space=false,
 	space=0.1) 
 {
+	echo("pinionDrum is depreacted, use pinionWheel instead, with number of pinion teeth set to zero!");
+
 	large_dedendum_radius=large_gear_circular_pitch*(large_gear_teeth-2)/360-gear_clearance;
 	//small_dedendum_radius=small_gear_circular_pitch*(small_gear_teeth-2)/360-gear_clearance;
 	
