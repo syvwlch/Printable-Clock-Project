@@ -26,7 +26,7 @@ stringHoleRadius=1*scale;		// radius of the holes in the drum
 // Escapement Wheel Parameters
 numberTeeth=15; 			// number of teeth in the escapement wheel
 toothLength=15*scale; 			// length of the tooth along longest face and to inner radius of the wheel
-toothLean=15; 				// how much the tooth leans over, clockwise, in degrees
+toothLean=33; 				// how much the tooth leans over, clockwise, in degrees
 toothSharpness=10; 			// the angle between the two side of each tooth
 clubSize=0.2; 				// relative size of the club on the teeth 
 clubAngle=22.5; 				// impulse face angle
