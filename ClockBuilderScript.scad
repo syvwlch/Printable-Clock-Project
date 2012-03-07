@@ -925,8 +925,8 @@ module escapementPendulum(sleeve_level,sleeve_extension,spacer,negativeSpace=fal
 	{
 		rotate(90-pendulumKink,[0,0,1])
 		{
-			translate([pinRadius+clearance,-armWidth,0])
-			cube([pendulumLength-(pinRadius+clearance)-(snapFitHeight+tightFit),2*armWidth,hubHeight]);
+			translate([bore_radius,-armWidth,0])
+			cube([pendulumLength-(bore_radius)-(snapFitHeight+tightFit),2*armWidth,hubHeight]);
 
 			translate([pendulumLength,0,hubHeight/2])
 			difference()
