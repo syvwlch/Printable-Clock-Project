@@ -929,47 +929,10 @@ module escapementPendulum(sleeve_level,sleeve_extension,spacer,negativeSpace=fal
 			cube([pendulumLength-(bore_radius)-(snapFitHeight+tightFit),2*armWidth,hubHeight]);
 
 			translate([pendulumLength,0,hubHeight/2])
-			difference()
 			{
 				translate([-pendulumRadius,-pendulumRadius,-hubHeight/2])
 				cube([pendulumRadius,pendulumRadius*2,hubHeight]);
-
-				rotate(90,[0,0,1])
-				translate ([0,0,-1])
-				trapezoidkey(snapFitBase, snapFitTop, snapFitHeight, hubHeight+8,1);
 			}
-
-			rotate((showToPrint==true ? 90 : 0),[0,0,1]) 
-			translate(
-				[(showToPrint==true ? -printLimit/2-pendulumLength : 0),
-				(showToPrint==true ? -printLimit/2 : 0),
-				0])
-			translate([pendulumLength,0,hubHeight/2])
-			difference()
-			{
-				union()
-				{
-					rotate(90,[0,0,1])
-					trapezoidkey(snapFitBase-tightFit, snapFitTop-tightFit, snapFitHeight-tightFit, hubHeight, tightFit);
-
-					translate([tightFit,-pendulumRadius,-hubHeight/2])
-					cube([pendulumLength-2*(snapFitHeight+tightFit),2*pendulumRadius,hubHeight]);
-
-					translate([tightFit+printLimit-pendulumRadius,-pendulumRadius,-hubHeight/2])
-					cube([pendulumLength-2*(snapFitHeight+tightFit),2*pendulumRadius,hubHeight]);
-
-					translate([tightFit+pendulumRadius,-pendulumRadius/2,-hubHeight/2])
-					cube([printLimit-2*(snapFitHeight+tightFit),pendulumRadius,hubHeight]);
-				}
-
-				rotate(90,[0,0,1])
-				translate ([0,-(printLimit+2*pendulumRadius-2*(snapFitHeight+tightFit)),-1])
-				trapezoidkey(snapFitBase, snapFitTop, snapFitHeight, hubHeight+8,1);
-
-				translate ([printLimit,0,-hubHeight])
-				ring(pinRadius+clearance,0,2*hubHeight);
-			}
-
 		}
 
 		if(negativeSpace==false) {ring(sleeve_radius,bore_radius,thickness+sleeve_extension+spacer);}
