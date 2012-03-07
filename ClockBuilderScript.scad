@@ -7,19 +7,19 @@ This script builds a clock from parameters defined in the script that calls it v
 CC-A-SA licensed.*/
 
 use <mcad/involute_gears.scad>
-include <clockworkLibrary.scad> 	// version 9
+include <clockworkLibrary.scad> 	// version 12
 
 // Overall Parameters
 $fs=0.25*scale;				// controls resolution for small details
-pinRadius=1.5*scale; 			// radius of the pins (0 if not using any)
-sleeveThickness=2*scale;		// thickness of the sleeves fitting over the pins, or over each other
-tightFit=0.25*scale;			// clearance between hands and sleeves
-clearance=0.5*scale;			// clearance between pin and sleeve, or between sleeve and sleeve
-spokeWidth=5*scale; 			// width of the spokes
 
+	//pinRadius 		has been moved to the clock parameter script
+	//sleeveThickness 	has been moved to the clock parameter script
+	//tightFi 			has been moved to the clock parameter script
+	//clearance 		has been moved to the clock parameter script
+	//spokeWidth 		has been moved to the clock parameter script
+	//numberSpoke 		has been moved to the clock parameter script
 
 // Drum Parameters
-numberSpokes=5;				// number of spokes in the drum
 stringHoleRadius=1*scale;		// radius of the holes in the drum
 
 
