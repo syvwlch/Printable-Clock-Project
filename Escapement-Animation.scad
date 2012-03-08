@@ -59,6 +59,18 @@ module animateEscapement(escAngle,wheelAngle,escapementColor=green)
 
 	color(escapementColor)
 	rotate(escAngle,[0,0,1])
+	import("Outputs/Escapement-Animation-Escapement.stl");
+
+	placeEscapement(180,radius,numberTeeth,toothSpan)
+	rotate(wheelAngle,[0,0,1])
+	import("Outputs/Escapement-Animation-Wheel.stl");
+}
+
+module exportEscapement()
+{
+	radius=axis_separation-(pinRadius+sleeveThickness+clearance);
+	bore_radius=pinRadius+sleeveThickness+clearance; 
+
 	escapement(
 		radius=radius, 
 		thickness=thickness,
@@ -75,9 +87,13 @@ module animateEscapement(escAngle,wheelAngle,escapementColor=green)
 		max_swing=6,
 		entryPalletAngle=45-toothLean+clubAngle, 
 		exitPalletAngle=45-toothLean+clubAngle);
+}
 
-	placeEscapement(180,radius,numberTeeth,toothSpan)
-	rotate(wheelAngle,[0,0,1])
+module exportWheel()
+{
+	radius=axis_separation-(pinRadius+sleeveThickness+clearance);
+	bore_radius=pinRadius+sleeveThickness+clearance; 
+
 	pinionEscapementWheel(
 		radius=radius, 
 		escapement_teeth=numberTeeth,
@@ -108,10 +124,6 @@ module animateEscapement(escAngle,wheelAngle,escapementColor=green)
 }
 
 // Script
-
-//animateEscapement(-6.5,-7,green); // entry drop
-
-//animateEscapement(5,-19,red); // exit drop
 
 translate([0,30,0])
 animateEscapement(0,-0,green);
