@@ -47,12 +47,13 @@ gearClearance=0.2*scale;		// clearance for all the gears
 gearBacklash=0.1*scale;		// backlash for all the gears
 
 // Colors
-red=		[1,0,0];
-green=	[0,1,0];
+r=	[1,0,0];
+g=	[0,1,0];
+b=	[0,0,1];
 
 // Module definitions
 
-module animateEscapement(escAngle,wheelAngle,escapementColor=green)
+module animateEscapement(escAngle,wheelAngle,escapementColor=[0,1,0])
 {
 	radius=axis_separation-(pinRadius+sleeveThickness+clearance);
 	bore_radius=pinRadius+sleeveThickness+clearance; 
@@ -125,8 +126,16 @@ module exportWheel()
 
 // Script
 
-translate([0,30,0])
-animateEscapement(0,-0,green);
+//exportWheel();
+//exportEscapement();
+
+escapementRot=	[ 0,-1,-2,-3,-4,-5,-6,-7,-8,-9];
+wheelRot=		[ 0,-1,-2,-3,-4,-5,-6,-8,-8,-8];
+colorRot=		[ g, g, g, g, g, g, g, r, b, b];
+
+i=len(wheelRot)-1;
+translate([0,30*scale,0])
+animateEscapement(escapementRot[i],wheelRot[i],colorRot[i]);
 
 
 
