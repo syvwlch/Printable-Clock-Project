@@ -229,6 +229,7 @@ module drum(
 {
 	flangeWidth=min(drumHeight/3,rimWidth/2);
 
+	if (drumHeight != 0 ) {
 	difference()		// makes the center hollow & includes holes to attach string
 	 {
 		union() 	// builds the drum with flanges
@@ -253,6 +254,7 @@ module drum(
 		cylinder(r=holeRadius,h=radius+1);
 	}
 
+	}
 	}
 }
 
